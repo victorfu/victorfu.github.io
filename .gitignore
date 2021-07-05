@@ -1,5 +1,2 @@
-
-*.iml
-*.ipr
-*.iws
-.idea
+vscode/*
+.idea/*

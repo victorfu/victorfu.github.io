@@ -1045,7 +1045,7 @@
     </div>
   </section>
 
-
+  
 
   <!-- ==================== 4.5 Sycophancy 研究 ==================== -->
   <section class="slide" style="background: var(--accent);">
@@ -1053,9 +1053,12 @@
     <div class="slide-tag" style="color: rgba(255,255,255,0.6);">研究發現</div>
 
     <div style="margin-top: auto; margin-bottom: auto;">
-      <span class="eyebrow" style="color: white;">Stanford + CMU，11 個主流模型，1，604 人實驗</span>
+      <span class="eyebrow" style="color: white;">Stanford + CMU · 11 個主流模型 · 1,604 人實驗</span>
 
-      <h1 class="h-bold-sans" style="color: white; margin-top: 1rem; font-size: clamp(2rem, 3.6vw, 3rem);">
+      <div style="margin-top: 1rem; font-family: var(--mono); font-size: 0.85rem; color: white; opacity: 0.85; letter-spacing: 0.05em;">
+        <strong style="color: white; opacity: 1;">SYCOPHANCY</strong> · 諂媚 — AI 目前最嚴重的問題之一
+      </div>
+      <h1 class="h-bold-sans" style="color: white; margin-top: 0.5rem; font-size: clamp(2rem, 3.6vw, 3rem);">
         AI 附和你的機率，比人類高出
       </h1>
 
@@ -1069,13 +1072,13 @@
 
       <div style="background: rgba(0,0,0,0.2); padding: 1.2rem 1.6rem; margin-top: 1.5rem; border-left: 3px solid white; max-width: 1000px;">
         <p style="color: white; margin-bottom: 0.6rem; font-size: 1rem;">
-          受試者<strong style="color: white;">給附和型 AI 評價更高、更信任、更願意再用</strong>。市場誘因會讓這個傾向越來越強。
+          更糟的是 — 受試者<strong style="color: white;">給附和型 AI 評價更高、更信任、更願意再用</strong>。市場誘因會讓<strong style="color: white;">「諂媚」越來越普遍</strong>。
         </p>
-
+        
       </div>
 
       <p style="color: white; opacity: 0.7; margin-top: 1.5rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.05em;">
-        Cheng et al.， ICLR 2026 / Science (in press) · arXiv:2510.01395
+        Cheng et al., ICLR 2026 / Science (in press) · arXiv:2510.01395
       </p>
     </div>
   </section>
@@ -1087,7 +1090,7 @@
 
     <div class="section-mark"></div>
     <h1 class="h-bold-sans">機制決定一切</h1>
-    <p class="lede" style="margin-top: 1rem;">所有資料都會變，但機制不會。LLM 不是在「知道」，是在「接下去」。</p>
+    <p class="lede" style="margin-top: 1rem;">所有資料都會變，但機制不會。每個 LLM 都是<strong>先學會「接下去」，再經由人類調整成「好用」</strong>。</p>
 
     <div class="token-viz">
       <div>
@@ -1130,15 +1133,29 @@
       </div>
     </div>
 
-    <div class="two-col" style="margin-top: 1.5rem;">
+    <p style="margin-top: 1.2rem; margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--ink-muted);">每個 LLM 都要走完<strong style="color: var(--ink);">這兩個步驟</strong>，才能跟你對話：</p>
+
+    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.2rem; align-items: stretch; margin-top: 0.5rem;">
+
+      <!-- Step 1: Pre-training -->
       <div class="card-tinted">
+        <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.3rem;">STEP 1</div>
         <div class="card-title">Pre-training：接下去</div>
-        <p style="margin-bottom: 0; font-size: 0.95rem;">根據上下文預測下一個最可能的 token。沒有世界模型、沒有因果理解。</p>
+        <p style="margin-bottom: 0.4rem; font-size: 0.95rem;">餵入網路上幾乎所有文字，讓模型學會<strong>「給定上文，預測下一個 token」</strong>。</p>
+        <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--ink-muted);">這時的模型很會接句子，但會接出奇怪、不禮貌、甚至有害的內容。沒有世界模型、沒有因果理解。</p>
       </div>
+
+      <!-- 箭頭 -->
+      <div style="display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--accent); font-weight: 700;">→</div>
+
+      <!-- Step 2: Post-training -->
       <div class="card-tinted">
+        <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.3rem;">STEP 2</div>
         <div class="card-title">Post-training：讓你滿意</div>
-        <p style="margin-bottom: 0; font-size: 0.95rem;">RLHF 把它調得更「好用」 — 完整、禮貌、順暢。但<strong>讓人滿意 ≠ 事實正確</strong>。</p>
+        <p style="margin-bottom: 0.4rem; font-size: 0.95rem;">人類標註員大量打分數，RLHF 把模型調整成<strong>「人會給高分」的樣子</strong>。</p>
+        <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--ink-muted);">這時的模型變得完整、禮貌、順暢 — 但<strong style="color: var(--ink);">「讓人滿意」≠「事實正確」</strong>。sycophancy 就是這一步的副作用。</p>
       </div>
+
     </div>
 
     <div class="bottom-note">
@@ -1147,7 +1164,7 @@
         <span class="ctx-arrow">→</span>
         <span class="ctx-label accent">NEXT TOKEN</span>
       </span>
-
+      
     </div>
   </section>
 
@@ -1583,7 +1600,7 @@
       </div>
     </div>
 
-
+    
   </section>
 
   <!-- ==================== 12. 觀察 7: 去技能化 ==================== -->
@@ -1742,7 +1759,7 @@
       </div>
     </div>
 
-
+    
   </section>
 
   <!-- ==================== 15. 七個觀察整理 ==================== -->
@@ -2211,7 +2228,7 @@
     </div>
   </section>
 
-
+  
 
   <!-- ==================== 20. 結語反白頁 ==================== -->
   <section class="slide" style="background: var(--ink); color: var(--bg);">
@@ -2254,9 +2271,9 @@
     </div>
   </section>
 
+  
 
-
-
+  
 
 </div>
 

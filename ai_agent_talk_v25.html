@@ -1047,9 +1047,731 @@
 
   
 
+  <!-- ==================== 3. 為什麼用這份資料 ==================== -->
+  <section class="slide alt compact">
+    <div class="slide-num">02 / 28</div>
+    <div class="slide-tag">資料介紹 · DATA</div>
+
+    <div class="section-mark"></div>
+    <h1 class="h-bold-sans">Anthropic Economic Index</h1>
+    <p class="lede" style="margin-top: 1rem;">Anthropic 用真實 Claude 對話資料，持續追蹤 AI 在經濟活動中的使用狀況。<br>不是問卷自評，是行為觀測。</p>
+
+    <div class="two-col" style="margin-top: 2rem;">
+      <div>
+        <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <path d="M16 3.128a4 4 0 0 1 0 7.744" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <circle cx="9" cy="7" r="4" /> </svg> Claude.ai 樣本(消費端)</h3>
+        <ul class="bullet-list">
+          <li>100 萬筆對話，2026/02 採樣</li>
+          <li>包含 Free / Pro / Max 各方案</li>
+          <li>多輪對話完整保留</li>
+          <li>排除 VPN、anycast、代管服務</li>
+        </ul>
+      </div>
+      <div>
+        <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 22v-5" /> <path d="M15 8V2" /> <path d="M17 8a1 1 0 0 1 1 1v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1z" /> <path d="M9 8V2" /> </svg> 1P API 樣本(企業端)</h3>
+        <ul class="bullet-list">
+          <li>100 萬筆 prompt-response 對</li>
+          <li>來自 api.anthropic.com 直接呼叫</li>
+          <li>不含 AWS Bedrock / Google Vertex</li>
+          <li>程式化、自動化工作流為主</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>分析流程</h2>
+
+    <div class="flow">
+      <div class="flow-node">原始對話</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">Clio 隱私過濾<br><span style="font-size: 0.75rem; color: var(--ink-muted);">最少 15 對話 / 5 帳號</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">Claude 自動分類器<br><span style="font-size: 0.75rem; color: var(--ink-muted);">Sonnet 4.5</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node">統計聚合 + 公開資料集</div>
+    </div>
+
+    <div class="card-tinted">
+      <p style="margin-bottom: 0;">
+        <strong>關鍵差別：</strong>不是「使用者自己說怎麼用」，而是<mark>從真實對話中分析</mark>。資料集公開在 HuggingFace，任何人都可以驗證 — 這是目前最接近真相的 AI 使用實證。
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 章節分隔: 資料 ==================== -->
+  <section class="slide section-divider compact">
+    <div class="slide-num">03 / 28</div>
+    <div class="slide-tag">PART I · 資料</div>
+
+    <div style="margin-top: auto; margin-bottom: auto;">
+      <span class="eyebrow">第一段 · 進入資料</span>
+      <h1 class="h-display">
+        七個觀察<br>
+        改變我對<br>
+        AI <span class="accent italic">使用方式</span>的認知
+      </h1>
+      <hr class="rule-thick">
+      <p class="lede" style="margin-top: 2rem; max-width: 700px;">
+        七個觀察，都指向同一個結論。
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 5. 觀察 1: 任務集中度 + Top 10 ==================== -->
+  <section class="slide compact">
+    <div class="slide-num">04 / 28</div>
+    <div class="slide-tag">觀察 1 · 集中度</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">觀察 1</span>
+    <h1 class="h-bold-sans">使用高度集中於少數任務</h1>
+    <p class="lede" style="margin-top: 1rem;">資料裡有 3,000+ 種不重複任務，聽起來很多元。<br>但企業端(API)的<span class="accent">前 10 大就吃掉三分之一流量</span> — 而且<span class="accent">10 項都是寫程式相關</span>。</p>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-num smaller">19.4%</div>
+        <div class="stat-label">Claude.ai 上前 10 大任務佔比</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num accent smaller">32.6%</div>
+        <div class="stat-label">1P API 上前 10 大任務佔比</div>
+        <div class="stat-delta">每三筆 API 呼叫就有一筆是這 10 件事之一</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num smaller">8.66%</div>
+        <div class="stat-label">1P API 最常見單一任務佔比：「修改現有軟體以修正錯誤」</div>
+        <div class="stat-delta">Claude.ai 上同任務佔約 4.16%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num green smaller">3,000+</div>
+        <div class="stat-label">Claude.ai 觀察到的不重複任務數量</div>
+        <div class="stat-delta">廣度大，但極度集中</div>
+      </div>
+    </div>
+
+    <h2>1P API 前 10 大任務 — 全部是技術工作</h2>
+
+    <table>
+      <thead>
+        <tr><th>#</th><th>任務(O*NET 描述)</th><th>佔比</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">1</td><td class="label">修改現有軟體以修正錯誤、適配新硬體或改善效能</td><td class="num">8.66%</td></tr>
+        <tr><td class="num">2</td><td class="label">執行例行系統管理(排錯、備份、升級)</td><td class="num">6.73%</td></tr>
+        <tr><td class="num">3</td><td class="label">撰寫或修改程式以滿足客戶需求</td><td class="num">2.84%</td></tr>
+        <tr><td class="num">4</td><td class="label">檢視軟體文件以確保技術正確、合規、完整</td><td class="num">2.81%</td></tr>
+        <tr><td class="num">5</td><td class="label">測試程式或資料庫、修正錯誤</td><td class="num">2.34%</td></tr>
+        <tr><td class="num">6</td><td class="label">開發或應用資料探勘與機器學習演算法</td><td class="num">1.54%</td></tr>
+        <tr><td class="num">7</td><td class="label">分析使用者需求與軟體需求</td><td class="num">1.40%</td></tr>
+        <tr><td class="num">8</td><td class="label">設計、建置或維護網站</td><td class="num">1.25%</td></tr>
+        <tr><td class="num">9</td><td class="label">撰寫、更新、維護程式或軟體套件</td><td class="num">1.10%</td></tr>
+        <tr><td class="num">10</td><td class="label">執行軟體安全性分析</td><td class="num">1.05%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="bottom-note">
+      結論：AI 在企業端的真實使用<span class="accent">高度集中於軟體工程</span>，涵蓋整個開發生命週期 — 寫、改、測、文件、安全。
+    </div>
+  </section>
+
+  <!-- ==================== 6. Claude.ai Top 10 對照 ==================== -->
+  <section class="slide alt compact">
+    <div class="slide-num">05 / 28</div>
+    <div class="slide-tag">觀察 1 · 對照</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">同樣資料 — 但消費端長這樣</span>
+    <h1 class="h-bold-sans">Claude.ai 前 10 大任務</h1>
+    <p class="lede" style="margin-top: 1rem;">企業端 10 個全是技術任務 — 消費端則是程式設計師、學生、文案工作者三族群混合。</p>
+
+    <table>
+      <thead>
+        <tr><th>#</th><th>任務</th><th>佔比</th><th>類型</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">1</td><td class="label">修改既有軟體以修正錯誤、適配新硬體或改善效能</td><td class="num">4.16%</td><td><span class="tag accent">編碼</span></td></tr>
+        <tr><td class="num">2</td><td class="label">撰寫或修改程式以滿足客戶需求</td><td class="num">2.85%</td><td><span class="tag accent">編碼</span></td></tr>
+        <tr><td class="num">3</td><td class="label">協助課餘需要額外輔導的學生</td><td class="num">1.97%</td><td><span class="tag">課業</span></td></tr>
+        <tr><td class="num">4</td><td class="label">修改既有軟體(O*NET 2010 vintage 版本)</td><td class="num">1.82%</td><td><span class="tag accent">編碼</span></td></tr>
+        <tr><td class="num">5</td><td class="label">診斷與排除硬體、軟體、網路系統問題</td><td class="num">1.70%</td><td><span class="tag accent">編碼</span></td></tr>
+        <tr><td class="num">6</td><td class="label">設計、建置或維護網站</td><td class="num">1.59%</td><td><span class="tag accent">編碼</span></td></tr>
+        <tr><td class="num">7</td><td class="label">執行例行系統管理(排錯、備份、升級)</td><td class="num">1.45%</td><td><span class="tag accent">編碼</span></td></tr>
+        <tr><td class="num">8</td><td class="label">撰稿、改寫、編輯文案以提升可讀性</td><td class="num">1.41%</td><td><span class="tag">文案</span></td></tr>
+        <tr><td class="num">9</td><td class="label">排除辦公設備(電腦軟硬體)問題</td><td class="num">1.26%</td><td><span class="tag accent">編碼</span></td></tr>
+        <tr><td class="num">10</td><td class="label">與學生討論教材、講解習題、檢查作業</td><td class="num">1.24%</td><td><span class="tag">課業</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="card-tinted">
+      <div class="card-title">編碼任務在「消費端」流失，在「企業端」上升</div>
+      <p style="margin-bottom: 0;">
+        Claude.ai 編碼任務佔比從 40% 高峰降到 35%。1P API 從 44% 升到 46%。
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 7. 觀察 2: r > 0.92 ==================== -->
+  <section class="slide" style="background: var(--accent);">
+    <div class="slide-num" style="color: rgba(255,255,255,0.5);">06 / 28</div>
+    <div class="slide-tag" style="color: rgba(255,255,255,0.6);">觀察 2 · 相關性</div>
+
+    <div style="margin-top: auto; margin-bottom: auto;">
+      <span class="eyebrow" style="color: white;">觀察 2 · 整份報告中相關性最強的單一發現</span>
+      <h1 class="h-display" style="color: white; margin-top: 0.5rem; font-size: clamp(2.4rem, 4.5vw, 3.6rem);">
+        你怎麼<span class="italic">問</span>,<br>
+        它就怎麼<span class="italic">答</span>
+      </h1>
+
+      <hr style="background: white; height: 2px; border: none; width: 200px; margin: 2rem 0;">
+
+      <p class="lede" style="color: white; max-width: 700px; opacity: 0.95;">
+        人類 prompt 的教育水準 vs AI 回應的教育水準，相關係數：
+      </p>
+
+      <div style="font-family: var(--serif); font-weight: 800; font-size: clamp(4rem, 9vw, 7rem); line-height: 1; margin: 0.5rem 0; color: white;">r > 0.92</div>
+
+      <p style="color: white; opacity: 0.95; max-width: 750px; font-size: 1.1rem;">
+        Claude 雖然能用非常複雜的方式回應，但<strong style="color: white;">它只在使用者用複雜方式提問時才這樣做</strong>。同一個 AI，簡單 prompt 進，簡單答案出；複雜 prompt 進，複雜答案出。
+      </p>
+
+      <div style="background: rgba(0,0,0,0.2); padding: 1.3rem 1.8rem; margin-top: 1.5rem; border-left: 3px solid white;">
+        <p style="color: white; margin-bottom: 0; font-size: 1rem;">
+          <strong style="color: white;">這呼應了 next-token prediction 的本質：</strong>它不是「知道」，是「接下去」 — <mark style="background: rgba(255,255,255,0.3); color: white;">使用 AI 的能力本身，就是一種能力</mark>。會問問題的人，才能拿到 AI 的高品質回答。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 8. 觀察 3: 擴增 vs 自動化 ==================== -->
+  <section class="slide compact">
+    <div class="slide-num">07 / 28</div>
+    <div class="slide-tag">觀察 3 · 互動模式</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">觀察 3</span>
+    <h1 class="h-bold-sans">五種互動模式，兩種大方向</h1>
+    <p class="lede" style="margin-top: 1rem;">所有對話都被分到這五種其中之一，再聚合成「擴增」與「自動化」兩大類。</p>
+
+    <table>
+      <thead>
+        <tr><th>類別</th><th>模式</th><th>定義</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label" style="color: var(--blue);">自動化</td>
+          <td>Directive(指令式)</td>
+          <td>使用者下指令，Claude 完成，幾乎無來回</td>
+        </tr>
+        <tr>
+          <td class="label" style="color: var(--blue);">自動化</td>
+          <td>Feedback Loops</td>
+          <td>使用者自動執行任務，適時提供回饋</td>
+        </tr>
+        <tr>
+          <td class="label" style="color: var(--accent);">擴增</td>
+          <td>Learning(學習)</td>
+          <td>使用者請 Claude 解釋概念</td>
+        </tr>
+        <tr>
+          <td class="label" style="color: var(--accent);">擴增</td>
+          <td>Task Iteration(任務迭代)</td>
+          <td>使用者與 Claude 反覆協作完成任務</td>
+        </tr>
+        <tr>
+          <td class="label" style="color: var(--accent);">擴增</td>
+          <td>Validation(驗證)</td>
+          <td>使用者請 Claude 對自己的工作給回饋</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="two-col" style="margin-top: 1.5rem;">
+      <div>
+        <h3 style="color: var(--accent);">Claude.ai(消費端)</h3>
+        <div class="compare-bar">
+          <div class="compare-bar-label"><span>Augmentation 擴增</span><span>52%</span></div>
+          <div class="compare-bar-track"><div class="compare-bar-fill" style="width: 52%"></div></div>
+        </div>
+        <div class="compare-bar">
+          <div class="compare-bar-label"><span>Automation 自動化</span><span>45%</span></div>
+          <div class="compare-bar-track"><div class="compare-bar-fill blue" style="width: 45%"></div></div>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="color: var(--blue);">1P API(企業端)</h3>
+        <div class="compare-bar">
+          <div class="compare-bar-label"><span>Augmentation 擴增</span><span>~25%</span></div>
+          <div class="compare-bar-track"><div class="compare-bar-fill" style="width: 25%"></div></div>
+        </div>
+        <div class="compare-bar">
+          <div class="compare-bar-label"><span>Automation 自動化</span><span>~75%</span></div>
+          <div class="compare-bar-track"><div class="compare-bar-fill blue" style="width: 75%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-note">
+      消費端是<span class="accent">人機協作</span>，企業端是<span class="accent">系統自動化</span>。
+    </div>
+  </section>
+
+  <!-- ==================== 9. 觀察 4: 任務時長 vs 成功率 ==================== -->
+  <section class="slide alt compact">
+    <div class="slide-num">08 / 28</div>
+    <div class="slide-tag">觀察 4 · 能力邊界</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">觀察 4</span>
+    <h1 class="h-bold-sans">越複雜的任務，加速越多 —<br>但失敗也越多</h1>
+    <p class="lede" style="margin-top: 1rem;">這個取捨很重要 — 它直接影響哪些工作適合交給 Agent。</p>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-num blue smaller">3.5 小時</div>
+        <div class="stat-label">API 端 50% 成功率對應的任務時長</div>
+        <div class="stat-delta">超過這長度就有一半會失敗</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num accent smaller">19 小時</div>
+        <div class="stat-label">Claude.ai 端外推的 50% 成功率時長</div>
+        <div class="stat-delta">多輪對話讓人能拆解問題</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num smaller">12×</div>
+        <div class="stat-label">大學程度任務的加速倍數</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num accent smaller">66%</div>
+        <div class="stat-label">大學程度任務的成功率</div>
+        <div class="stat-delta">越專業越容易失敗</div>
+      </div>
+    </div>
+
+    <h2>「Task Horizon」是 AI 進步的關鍵指標</h2>
+
+    <p>METR 基準顯示 Claude Sonnet 4.5 在軟工任務上的 50% 成功率對應 ~2 小時，Opus 4.5 約 5 小時。<strong>每代模型大約讓這個時長翻倍</strong>。</p>
+
+    <div class="card-tinted">
+      <div class="card-title">為什麼 Claude.ai 比 API 高這麼多？</div>
+      <p style="margin-bottom: 0;">
+        因為消費端可以多輪對話 — <mark>多輪對話本身就是「任務拆解工具」</mark>。把一個 19 小時的問題，拆成許多 30 分鐘的問題，一個個來。但 API 是單輪、一次定生死。
+      </p>
+    </div>
+
+    <div class="bottom-note">
+      AI <span class="accent">加速很大</span>，但「驗證」是新的瓶頸 — 越複雜的任務越需要人工把關。
+    </div>
+  </section>
+
+  <!-- ==================== 10. 觀察 5: 生產力推估打折 ==================== -->
+  <section class="slide compact">
+    <div class="slide-num">09 / 28</div>
+    <div class="slide-tag">觀察 5 · 生產力</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">觀察 5</span>
+    <h1 class="h-bold-sans">「生產力提升 1.8%」<br>納入成功率後，只剩 1.0%</h1>
+    <p class="lede" style="margin-top: 1rem;">Anthropic 自己對自己的生產力推估做了三層打折，結論值得看。<br><span style="font-size: 0.85rem; color: var(--ink-muted);">註：這裡的「個百分點」指<strong>年化勞動生產力成長率</strong>，也就是每年人均產出成長速度，美國長期約 1-2%。</span></p>
+
+    <table>
+      <thead>
+        <tr><th>情境</th><th>Claude.ai</th><th>1P API</th><th>說明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">原始基準</td>
+          <td class="num">+1.8 個百分點</td>
+          <td class="num">+1.8 個百分點</td>
+          <td>純看時間節省</td>
+        </tr>
+        <tr>
+          <td class="label">+ 成功率折扣</td>
+          <td class="num" style="color: var(--accent);">+1.2 個百分點</td>
+          <td class="num" style="color: var(--accent);">+1.0 個百分點</td>
+          <td>不是每次都成功，要折扣</td>
+        </tr>
+        <tr>
+          <td class="label">+ 任務互補拖累</td>
+          <td class="num" style="color: var(--accent);">+0.8 個百分點</td>
+          <td class="num" style="color: var(--accent);">+0.6 個百分點</td>
+          <td>整個職業的產出受限於最慢的任務。例：老師可以用 AI 高效備課，但上課時間沒辦法縮短。</td>
+        </tr>
+        <tr>
+          <td class="label">+ 勞動力特化</td>
+          <td class="num" style="color: var(--green);">+2.2 個百分點</td>
+          <td class="num" style="color: var(--green);">+2.6 個百分點</td>
+          <td>勞工會集體轉向 AI 加速最多的任務和職業，放大整體節省。例：更多人去做寫程式相關的工作。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="two-col">
+      <div class="card-blue">
+        <div class="card-title">即使打折也很大</div>
+        <p style="margin-bottom: 0;">+1.0 個百分點的<strong>年化勞動生產力成長率</strong>，就足以讓美國回到 1990 年代末的高成長時代。歷史上算很罕見的擴張。</p>
+      </div>
+      <div class="card-tinted">
+        <div class="card-title">「任務互補」是隱憂</div>
+        <p style="margin-bottom: 0;"><strong>有些任務 AI 加速不了，會拖慢整體生產力</strong>。老師可以用 AI 高效備課，但減少不了課堂時間。整個職業的產出，受限於最慢的那個任務。</p>
+      </div>
+    </div>
+
+    <div class="bottom-note">
+      別只看「節省了多少時間」 — 要看「<span class="accent">節省下的時間 × 成功率</span>」。
+    </div>
+  </section>
+
+  <!-- ==================== 11. 觀察 6: 學習曲線 ==================== -->
+  <section class="slide alt compact">
+    <div class="slide-num">10 / 28</div>
+    <div class="slide-tag">觀察 6 · 學習曲線</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">觀察 6 · 3 月報告最重要的單一發現</span>
+    <h1 class="h-bold-sans">高資歷使用者的成功率<br>高出 <span class="accent">10%</span> <span style="font-family: var(--mono); font-size: 0.55em; color: var(--ink-muted); font-weight: 400;">(相對)</span></h1>
+    <p class="lede" style="margin-top: 1rem;">這不是因為他們做不同的事 — 是因為他們學會「怎麼跟 AI 工作」。</p>
+
+    <h2>迴歸結果(成功率對「高資歷」指標) <span style="font-family: var(--mono); font-size: 0.7em; color: var(--ink-muted); font-weight: 400;">— 下表為絕對百分點 (pp)</span></h2>
+
+    <table>
+      <colgroup>
+        <col style="width: 40%;">
+        <col style="width: 20%;">
+        <col style="width: 40%;">
+      </colgroup>
+      <thead>
+        <tr><th>模型規格</th><th style="text-align: center;">效應(百分點)</th><th>解讀</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">(1) 雙變量(無控制)</td>
+          <td class="num" style="text-align: center;">+5 pp</td>
+          <td>原始效應</td>
+        </tr>
+        <tr>
+          <td class="label">(2) + 任務固定效應</td>
+          <td class="num" style="text-align: center;">+3 pp</td>
+          <td>同一任務內比較，效應減弱但仍在</td>
+        </tr>
+        <tr>
+          <td class="label">(3) + 全控制(模型、語言、國家)</td>
+          <td class="num" style="color: var(--accent); text-align: center;">+4 pp</td>
+          <td>差距未消失，反而略增</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="two-col" style="margin-top: 1.5rem;">
+      <div>
+        <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 7h6v6" /> <path d="m22 7-8.5 8.5-5-5L2 17" /> </svg> 隨年資增長的指標</h3>
+        <ul class="bullet-list">
+          <li>每多用 1 年，prompt 教育水準 +1 年</li>
+          <li>工作用途比例：+7 pp</li>
+          <li>使用任務多元度：+1.5 pp</li>
+        </ul>
+      </div>
+      <div>
+        <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 17h6v-6" /> <path d="m22 17-8.5-8.5-5 5L2 7" /> </svg> 隨年資下降的指標</h3>
+        <ul class="bullet-list">
+          <li>個人用途:44% → 38%</li>
+          <li>指令式委派：減少</li>
+          <li>單次性任務：減少</li>
+        </ul>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- ==================== 12. 觀察 7: 去技能化 ==================== -->
+  <section class="slide compact">
+    <div class="slide-num">11 / 28</div>
+    <div class="slide-tag">觀察 7 · 去技能化</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">觀察 7 · 最值得警覺的發現</span>
+    <h1 class="h-bold-sans">AI 拿走的，<br>都是「需要技能」的部分</h1>
+    <p class="lede" style="margin-top: 1rem;">這個發現跟直覺相反 — AI 拿走的不是低薪、低技能的工作。</p>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-num smaller">13.2 年</div>
+        <div class="stat-label">經濟體所有任務的平均教育需求</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num accent smaller">14.4 年</div>
+        <div class="stat-label">Claude 處理任務的平均教育需求</div>
+        <div class="stat-delta">比整體高 1.2 年(接近學士程度)</div>
+      </div>
+    </div>
+
+    <h2>具體案例：技術寫手的工作怎麼變？</h2>
+
+    <div class="two-col">
+      <div class="card-tinted">
+        <div class="card-title">⬆ AI 拿走(高技能)</div>
+        <ul class="bullet-list">
+          <li>分析發展、判斷修訂需求(18.7 年)</li>
+          <li>檢視出版品、建議格式調整(16.4 年)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">⬇ 留給人(低技能)</div>
+        <ul class="bullet-list">
+          <li>畫示意圖(13.6 年)</li>
+          <li>觀察生產活動(13.5 年)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>少數職業反而升技能化</h2>
+
+    <div class="card-green">
+      <div class="card-title">房地產經理</div>
+      <p style="margin-bottom: 0;">
+        AI 接走<strong>低教育需求的例行行政</strong>(12-13 年教育就能做的事，如維護紀錄、比對租金)，<strong>留下高教育需求的判斷工作</strong>(15+ 年才能做，如取得貸款、與建築師議約、董事會會議)。<br>這是少數例外 — 但只有「原本就需要複雜協作」的職位才能變這樣。
+      </p>
+    </div>
+
+    <div class="bottom-note">
+      預測：技術寫手與旅行社員<span class="accent">工資下降但就業上升</span>；房地產經理<span class="accent">就業下降但工資上升</span>。
+    </div>
+  </section>
+
+  <!-- ==================== 13. 美國 vs 全球擴散 ==================== -->
+  <section class="slide alt compact">
+    <div class="slide-num">12 / 28</div>
+    <div class="slide-tag">補充觀察 · 地理</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">補充觀察</span>
+    <h1 class="h-bold-sans">美國各州在快速收斂，<br>但跨國差距正在擴大</h1>
+
+    <div class="two-col" style="margin-top: 2rem;">
+      <div class="card-green">
+        <div class="card-title">🇺🇸 美國州際：快速收斂</div>
+        <div style="font-family: var(--serif); font-weight: 800; font-size: 2.4rem; color: var(--green); margin: 0.8rem 0;">5-9 年</div>
+        <div class="stat-label">預估達到人均使用平等的時間</div>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Gini 從 0.37 → 0.32(三個月內)。比 20 世紀重大技術擴散<strong>快約 10 倍</strong>。</p>
+      </div>
+
+      <div class="card-tinted">
+        <div class="card-title"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /> </svg> 跨國：差距擴大</div>
+        <div style="font-family: var(--serif); font-weight: 800; font-size: 2.4rem; color: var(--accent); margin: 0.8rem 0;">45% → 48%</div>
+        <div class="stat-label">前 20 國佔人均使用比重變化</div>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">前五大使用國：美國、印度、日本、英國、南韓。GDP per capita 仍是強烈解釋變數(每 +1% GDP → +0.7% 使用)。</p>
+      </div>
+    </div>
+
+    <h2>使用情境也隨富裕度分化</h2>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="card-title" style="color: var(--accent);"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /> <path d="M22 10v6" /> <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /> </svg> 學業用途</div>
+        <p style="margin-bottom: 0; font-size: 0.95rem;">在<strong>低收入國家最高</strong>。免費版能滿足課業需求，專業任務通常需付費。</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: var(--blue);"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /> <rect width="20" height="14" x="2" y="6" rx="2" /> </svg> 工作用途</div>
+        <p style="margin-bottom: 0; font-size: 0.95rem;">在<strong>中高收入國家最高</strong>。巴爾幹半島與巴西意外名列前茅。</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: var(--green);"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /> </svg> 個人用途</div>
+        <p style="margin-bottom: 0; font-size: 0.95rem;">在<strong>高收入國家最高</strong>。富國使用者用 AI 處理生活雜務。</p>
+      </div>
+    </div>
+
+    <div class="bottom-note">
+      AI 不會拉近全球差距 — <span class="accent">會放大原本就有的差距</span>。
+    </div>
+  </section>
+
+  <!-- ==================== 14. 模型選擇行為 ==================== -->
+  <section class="slide compact">
+    <div class="slide-num">13 / 28</div>
+    <div class="slide-tag">補充觀察 · 模型選擇</div>
+
+    <div class="section-mark"></div>
+    <span class="eyebrow">補充觀察 · 使用者其實很理性</span>
+    <h1 class="h-bold-sans">使用者會依任務難度切模型 —<br>API 用戶比 Web 用戶敏感 2 倍</h1>
+
+    <h2>付費 Claude.ai 用戶 Opus 使用率(整體 51%)</h2>
+
+    <table>
+      <colgroup>
+        <col style="width: 40%;">
+        <col style="width: 25%;">
+        <col style="width: 35%;">
+      </colgroup>
+      <thead>
+        <tr><th>任務類別</th><th style="text-align: center;">Opus 使用率</th><th style="text-align: center;">差距(對比平均)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">電腦數學任務(編碼)</td>
+          <td class="num" style="text-align: center;">55%</td>
+          <td class="num" style="color: var(--green); text-align: center;">+4.4 pp</td>
+        </tr>
+        <tr>
+          <td class="label">教育/輔導任務</td>
+          <td class="num" style="text-align: center;">45%</td>
+          <td class="num" style="color: var(--accent); text-align: center;">-7 pp</td>
+        </tr>
+        <tr>
+          <td class="label">家教任務</td>
+          <td class="num" style="text-align: center;">12%</td>
+          <td class="num" style="color: var(--accent); text-align: center;">遠低於平均</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>價值彈性：時薪 vs Opus 使用率</h2>
+
+    <div class="two-col">
+      <div class="card-tinted">
+        <div class="card-title">Claude.ai 用戶</div>
+        <div class="stat-num accent smaller">+1.5 pp</div>
+        <div class="stat-label">時薪每 +$10,Opus 使用率上升幅度</div>
+      </div>
+      <div class="card-blue">
+        <div class="card-title">1P API 用戶</div>
+        <div class="stat-num blue smaller">+2.8 pp</div>
+        <div class="stat-label">幾乎是 Claude.ai 的兩倍敏感</div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- ==================== 15. 七個觀察整理 ==================== -->
+  <section class="slide alt compact">
+    <div class="slide-num">14 / 28</div>
+    <div class="slide-tag">中段整理 · RECAP</div>
+
+    <div class="section-mark"></div>
+    <h1 class="h-bold-sans">七個觀察，一張表看完</h1>
+
+    <table style="margin-top: 1.5rem;">
+      <thead>
+        <tr>
+          <th style="width: 5%;">#</th>
+          <th style="width: 30%;">觀察</th>
+          <th>關鍵數字</th>
+          <th>啟示</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td class="label">使用集中於少數任務</td>
+          <td class="num">API 32.6%</td>
+          <td>整個軟工生命週期都在 API 上</td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td class="label">prompt 決定 response 水準</td>
+          <td class="num">r > 0.92</td>
+          <td>使用 AI 的能力本身就是能力</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td class="label">擴增 vs 自動化分化</td>
+          <td class="num">52% / 75%</td>
+          <td>消費端協作 / 企業端自動化</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td class="label">複雜任務加速大、成功率低</td>
+          <td class="num">12× / 66%</td>
+          <td>驗證是新瓶頸</td>
+        </tr>
+        <tr>
+          <td class="num">5</td>
+          <td class="label">生產力推估要打折</td>
+          <td class="num">1.8 → 1.0 pp</td>
+          <td>別只看時間節省</td>
+        </tr>
+        <tr>
+          <td class="num">6</td>
+          <td class="label">有學習曲線</td>
+          <td class="num">+10% 成功率</td>
+          <td>onboarding 是差異化關鍵</td>
+        </tr>
+        <tr>
+          <td class="num">7</td>
+          <td class="label">去技能化效應</td>
+          <td class="num">14.4 / 13.2 年</td>
+          <td>AI 拿走的是高技能部分</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="bottom-note">
+      數據已經很清楚 — 但<span class="accent">資料給不出下一步</span>。
+    </div>
+  </section>
+
+  <!-- ==================== 章節分隔: 反思 ==================== -->
+  <section class="slide section-divider compact">
+    <div class="slide-num">15 / 28</div>
+    <div class="slide-tag">PART II · 回應</div>
+
+    <div style="margin-top: auto; margin-bottom: auto;">
+      <span class="eyebrow">第二段 · 回到一開始的問題</span>
+      <h1 class="h-display">
+        那我們<br>
+        還剩下<br>
+        <span class="accent italic">什麼？</span>
+      </h1>
+      <hr class="rule-thick">
+      <p class="lede" style="margin-top: 2rem; max-width: 700px;">
+        當機器越做越多、做得越好，人類的價值放在哪裡？<br>這是資料給不出答案的問題 — 但不能不答。
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 16. 五件還剩的事 ==================== -->
+  <section class="slide compact">
+    <div class="slide-num">16 / 28</div>
+    <div class="slide-tag">回應 · 五件事</div>
+
+    <div class="section-mark"></div>
+    <h1 class="h-bold-sans">資料告訴我：這五件事還在我們手上</h1>
+    <p class="lede" style="margin-top: 1rem;">每一件都對應到前面的觀察 — 都是資料支持的結論，不是個人感想。</p>
+
+    <div class="numbered-list" style="margin-top: 2rem;">
+      <div class="numbered-item">
+        <div class="num">01</div>
+        <div class="numbered-title">標準</div>
+        <div class="numbered-desc">什麼叫「夠好」、什麼叫「不能交付」?觀察 4 顯示成功率隨複雜度下降 — 必須有人定義「驗證標準」。</div>
+      </div>
+      <div class="numbered-item">
+        <div class="num">02</div>
+        <div class="numbered-title">脈絡</div>
+        <div class="numbered-desc">為什麼做這個、為什麼是現在？觀察 2(r > 0.92)告訴我們：你給什麼脈絡，它就給什麼回答。脈絡是輸入端的責任。</div>
+      </div>
+      <div class="numbered-item">
+        <div class="num">03</div>
+        <div class="numbered-title">取捨</div>
+        <div class="numbered-desc">兩邊都有道理時，必須有人決定<strong>哪個更重要</strong>。速度 vs 品質、短期 vs 長期 — 觀察 5 的生產力打折就是這種事。AI 算不出價值排序。</div>
+      </div>
+      <div class="numbered-item">
+        <div class="num">04</div>
+        <div class="numbered-title">判斷</div>
+        <div class="numbered-desc">資訊永遠不完整時，必須有人在<strong>迷霧中下決定</strong>。資料說 A，直覺說 B，經驗說 C — 該信哪個?觀察 7 顯示 AI 拿走的就是這層，必須主動把它留下來。</div>
+      </div>
+      <div class="numbered-item">
+        <div class="num">05</div>
+        <div class="numbered-title">責任</div>
+        <div class="numbered-desc">事情出錯，沒有「是 AI 做的」這個說法。法律上、團隊文化上都不允許。</div>
+      </div>
+    </div>
+
+    <div class="bottom-note">
+      共通點：<span class="accent">都不是「做事」</span>，都是<span class="accent">「想清楚」</span>。這就是資料給我們的答案。
+    </div>
+  </section>
   <!-- ==================== 4.5 Sycophancy 研究 ==================== -->
   <section class="slide" style="background: var(--accent);">
-    <div class="slide-num" style="color: rgba(255,255,255,0.5);">02 / 28</div>
+    <div class="slide-num" style="color: rgba(255,255,255,0.5);">17 / 28</div>
     <div class="slide-tag" style="color: rgba(255,255,255,0.6);">研究發現</div>
 
     <div style="margin-top: auto; margin-bottom: auto;">
@@ -1085,7 +1807,7 @@
 
   <!-- ==================== 4. LLM 是接下去 ==================== -->
   <section class="slide compact">
-    <div class="slide-num">03 / 28</div>
+    <div class="slide-num">18 / 28</div>
     <div class="slide-tag">背景 · 機制</div>
 
     <div class="section-mark"></div>
@@ -1168,728 +1890,6 @@
     </div>
   </section>
 
-  <!-- ==================== 3. 為什麼用這份資料 ==================== -->
-  <section class="slide alt compact">
-    <div class="slide-num">04 / 28</div>
-    <div class="slide-tag">資料介紹 · DATA</div>
-
-    <div class="section-mark"></div>
-    <h1 class="h-bold-sans">Anthropic Economic Index</h1>
-    <p class="lede" style="margin-top: 1rem;">Anthropic 用真實 Claude 對話資料，持續追蹤 AI 在經濟活動中的使用狀況。<br>不是問卷自評，是行為觀測。</p>
-
-    <div class="two-col" style="margin-top: 2rem;">
-      <div>
-        <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <path d="M16 3.128a4 4 0 0 1 0 7.744" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <circle cx="9" cy="7" r="4" /> </svg> Claude.ai 樣本(消費端)</h3>
-        <ul class="bullet-list">
-          <li>100 萬筆對話，2026/02 採樣</li>
-          <li>包含 Free / Pro / Max 各方案</li>
-          <li>多輪對話完整保留</li>
-          <li>排除 VPN、anycast、代管服務</li>
-        </ul>
-      </div>
-      <div>
-        <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 22v-5" /> <path d="M15 8V2" /> <path d="M17 8a1 1 0 0 1 1 1v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1z" /> <path d="M9 8V2" /> </svg> 1P API 樣本(企業端)</h3>
-        <ul class="bullet-list">
-          <li>100 萬筆 prompt-response 對</li>
-          <li>來自 api.anthropic.com 直接呼叫</li>
-          <li>不含 AWS Bedrock / Google Vertex</li>
-          <li>程式化、自動化工作流為主</li>
-        </ul>
-      </div>
-    </div>
-
-    <h2>分析流程</h2>
-
-    <div class="flow">
-      <div class="flow-node">原始對話</div>
-      <span class="flow-arrow">→</span>
-      <div class="flow-node">Clio 隱私過濾<br><span style="font-size: 0.75rem; color: var(--ink-muted);">最少 15 對話 / 5 帳號</span></div>
-      <span class="flow-arrow">→</span>
-      <div class="flow-node">Claude 自動分類器<br><span style="font-size: 0.75rem; color: var(--ink-muted);">Sonnet 4.5</span></div>
-      <span class="flow-arrow">→</span>
-      <div class="flow-node">統計聚合 + 公開資料集</div>
-    </div>
-
-    <div class="card-tinted">
-      <p style="margin-bottom: 0;">
-        <strong>關鍵差別：</strong>不是「使用者自己說怎麼用」，而是<mark>從真實對話中分析</mark>。資料集公開在 HuggingFace，任何人都可以驗證 — 這是目前最接近真相的 AI 使用實證。
-      </p>
-    </div>
-  </section>
-
-  <!-- ==================== 章節分隔: 資料 ==================== -->
-  <section class="slide section-divider compact">
-    <div class="slide-num">05 / 28</div>
-    <div class="slide-tag">PART I · 資料</div>
-
-    <div style="margin-top: auto; margin-bottom: auto;">
-      <span class="eyebrow">第一段 · 進入資料</span>
-      <h1 class="h-display">
-        七個觀察<br>
-        改變我對<br>
-        AI <span class="accent italic">使用方式</span>的認知
-      </h1>
-      <hr class="rule-thick">
-      <p class="lede" style="margin-top: 2rem; max-width: 700px;">
-        七個觀察，都指向同一個結論。
-      </p>
-    </div>
-  </section>
-
-  <!-- ==================== 5. 觀察 1: 任務集中度 + Top 10 ==================== -->
-  <section class="slide compact">
-    <div class="slide-num">06 / 28</div>
-    <div class="slide-tag">觀察 1 · 集中度</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">觀察 1</span>
-    <h1 class="h-bold-sans">使用高度集中於少數任務</h1>
-    <p class="lede" style="margin-top: 1rem;">資料裡有 3,000+ 種不重複任務，聽起來很多元。<br>但企業端(API)的<span class="accent">前 10 大就吃掉三分之一流量</span> — 而且<span class="accent">10 項都是寫程式相關</span>。</p>
-
-    <div class="stat-grid">
-      <div class="stat">
-        <div class="stat-num smaller">19.4%</div>
-        <div class="stat-label">Claude.ai 上前 10 大任務佔比</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num accent smaller">32.6%</div>
-        <div class="stat-label">1P API 上前 10 大任務佔比</div>
-        <div class="stat-delta">每三筆 API 呼叫就有一筆是這 10 件事之一</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num smaller">8.66%</div>
-        <div class="stat-label">最常見單一任務：「修改現有軟體以修正錯誤」</div>
-        <div class="stat-delta">兩個平台第一名都是它</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num green smaller">3,000+</div>
-        <div class="stat-label">Claude.ai 觀察到的不重複任務數量</div>
-        <div class="stat-delta">廣度大，但極度集中</div>
-      </div>
-    </div>
-
-    <h2>1P API 前 10 大任務 — 全部是技術工作</h2>
-
-    <table>
-      <thead>
-        <tr><th>#</th><th>任務(O*NET 描述)</th><th>佔比</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="num">1</td><td class="label">修改現有軟體以修正錯誤、適配新硬體或改善效能</td><td class="num">8.66%</td></tr>
-        <tr><td class="num">2</td><td class="label">執行例行系統管理(排錯、備份、升級)</td><td class="num">6.73%</td></tr>
-        <tr><td class="num">3</td><td class="label">撰寫或修改程式以滿足客戶需求</td><td class="num">2.84%</td></tr>
-        <tr><td class="num">4</td><td class="label">檢視軟體文件以確保技術正確、合規、完整</td><td class="num">2.81%</td></tr>
-        <tr><td class="num">5</td><td class="label">測試程式或資料庫、修正錯誤</td><td class="num">2.34%</td></tr>
-        <tr><td class="num">6</td><td class="label">開發或應用資料探勘與機器學習演算法</td><td class="num">1.54%</td></tr>
-        <tr><td class="num">7</td><td class="label">分析使用者需求與軟體需求</td><td class="num">1.40%</td></tr>
-        <tr><td class="num">8</td><td class="label">設計、建置或維護網站</td><td class="num">1.25%</td></tr>
-        <tr><td class="num">9</td><td class="label">撰寫、更新、維護程式或軟體套件</td><td class="num">1.10%</td></tr>
-        <tr><td class="num">10</td><td class="label">執行軟體安全性分析</td><td class="num">1.05%</td></tr>
-      </tbody>
-    </table>
-
-    <div class="bottom-note">
-      結論：AI 在企業端的真實使用<span class="accent">高度集中於軟體工程</span>，涵蓋整個開發生命週期 — 寫、改、測、文件、安全。
-    </div>
-  </section>
-
-  <!-- ==================== 6. Claude.ai Top 10 對照 ==================== -->
-  <section class="slide alt compact">
-    <div class="slide-num">07 / 28</div>
-    <div class="slide-tag">觀察 1 · 對照</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">同樣資料 — 但消費端長這樣</span>
-    <h1 class="h-bold-sans">Claude.ai 前 10 大任務</h1>
-    <p class="lede" style="margin-top: 1rem;">企業端 10 個全是技術任務 — 消費端則是程式設計師、學生、文案工作者三族群混合。</p>
-
-    <table>
-      <thead>
-        <tr><th>#</th><th>任務</th><th>佔比</th><th>類型</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="num">1</td><td class="label">修改既有軟體以修正錯誤、適配新硬體或改善效能</td><td class="num">4.16%</td><td><span class="tag accent">編碼</span></td></tr>
-        <tr><td class="num">2</td><td class="label">撰寫或修改程式以滿足客戶需求</td><td class="num">2.85%</td><td><span class="tag accent">編碼</span></td></tr>
-        <tr><td class="num">3</td><td class="label">協助課餘需要額外輔導的學生</td><td class="num">1.97%</td><td><span class="tag">課業</span></td></tr>
-        <tr><td class="num">4</td><td class="label">修改既有軟體(O*NET 2010 vintage 版本)</td><td class="num">1.82%</td><td><span class="tag accent">編碼</span></td></tr>
-        <tr><td class="num">5</td><td class="label">診斷與排除硬體、軟體、網路系統問題</td><td class="num">1.70%</td><td><span class="tag accent">編碼</span></td></tr>
-        <tr><td class="num">6</td><td class="label">設計、建置或維護網站</td><td class="num">1.59%</td><td><span class="tag accent">編碼</span></td></tr>
-        <tr><td class="num">7</td><td class="label">執行例行系統管理(排錯、備份、升級)</td><td class="num">1.45%</td><td><span class="tag accent">編碼</span></td></tr>
-        <tr><td class="num">8</td><td class="label">撰稿、改寫、編輯文案以提升可讀性</td><td class="num">1.41%</td><td><span class="tag">文案</span></td></tr>
-        <tr><td class="num">9</td><td class="label">排除辦公設備(電腦軟硬體)問題</td><td class="num">1.26%</td><td><span class="tag accent">編碼</span></td></tr>
-        <tr><td class="num">10</td><td class="label">與學生討論教材、講解習題、檢查作業</td><td class="num">1.24%</td><td><span class="tag">課業</span></td></tr>
-      </tbody>
-    </table>
-
-    <div class="card-tinted">
-      <div class="card-title">編碼任務在「消費端」流失，在「企業端」上升</div>
-      <p style="margin-bottom: 0;">
-        Claude.ai 編碼任務佔比從 40% 高峰降到 35%。1P API 從 44% 升到 46%。
-      </p>
-    </div>
-  </section>
-
-  <!-- ==================== 7. 觀察 2: r > 0.92 ==================== -->
-  <section class="slide" style="background: var(--accent);">
-    <div class="slide-num" style="color: rgba(255,255,255,0.5);">08 / 28</div>
-    <div class="slide-tag" style="color: rgba(255,255,255,0.6);">觀察 2 · 相關性</div>
-
-    <div style="margin-top: auto; margin-bottom: auto;">
-      <span class="eyebrow" style="color: white;">觀察 2 · 整份報告中相關性最強的單一發現</span>
-      <h1 class="h-display" style="color: white; margin-top: 0.5rem; font-size: clamp(2.4rem, 4.5vw, 3.6rem);">
-        你怎麼<span class="italic">問</span>,<br>
-        它就怎麼<span class="italic">答</span>
-      </h1>
-
-      <hr style="background: white; height: 2px; border: none; width: 200px; margin: 2rem 0;">
-
-      <p class="lede" style="color: white; max-width: 700px; opacity: 0.95;">
-        人類 prompt 的教育水準 vs AI 回應的教育水準，相關係數：
-      </p>
-
-      <div style="font-family: var(--serif); font-weight: 800; font-size: clamp(4rem, 9vw, 7rem); line-height: 1; margin: 0.5rem 0; color: white;">r > 0.92</div>
-
-      <p style="color: white; opacity: 0.95; max-width: 750px; font-size: 1.1rem;">
-        Claude 雖然能用非常複雜的方式回應，但<strong style="color: white;">它只在使用者用複雜方式提問時才這樣做</strong>。同一個 AI，簡單 prompt 進，簡單答案出；複雜 prompt 進，複雜答案出。
-      </p>
-
-      <div style="background: rgba(0,0,0,0.2); padding: 1.3rem 1.8rem; margin-top: 1.5rem; border-left: 3px solid white;">
-        <p style="color: white; margin-bottom: 0; font-size: 1rem;">
-          <strong style="color: white;">這呼應了 next-token prediction 的本質：</strong>它不是「知道」，是「接下去」 — <mark style="background: rgba(255,255,255,0.3); color: white;">使用 AI 的能力本身，就是一種能力</mark>。會問問題的人，才能拿到 AI 的高品質回答。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 8. 觀察 3: 擴增 vs 自動化 ==================== -->
-  <section class="slide compact">
-    <div class="slide-num">09 / 28</div>
-    <div class="slide-tag">觀察 3 · 互動模式</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">觀察 3</span>
-    <h1 class="h-bold-sans">五種互動模式，兩種大方向</h1>
-    <p class="lede" style="margin-top: 1rem;">所有對話都被分到這五種其中之一，再聚合成「擴增」與「自動化」兩大類。</p>
-
-    <table>
-      <thead>
-        <tr><th>類別</th><th>模式</th><th>定義</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="label" style="color: var(--blue);">自動化</td>
-          <td>Directive(指令式)</td>
-          <td>使用者下指令，Claude 完成，幾乎無來回</td>
-        </tr>
-        <tr>
-          <td class="label" style="color: var(--blue);">自動化</td>
-          <td>Feedback Loops</td>
-          <td>使用者自動執行任務，適時提供回饋</td>
-        </tr>
-        <tr>
-          <td class="label" style="color: var(--accent);">擴增</td>
-          <td>Learning(學習)</td>
-          <td>使用者請 Claude 解釋概念</td>
-        </tr>
-        <tr>
-          <td class="label" style="color: var(--accent);">擴增</td>
-          <td>Task Iteration(任務迭代)</td>
-          <td>使用者與 Claude 反覆協作完成任務</td>
-        </tr>
-        <tr>
-          <td class="label" style="color: var(--accent);">擴增</td>
-          <td>Validation(驗證)</td>
-          <td>使用者請 Claude 對自己的工作給回饋</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="two-col" style="margin-top: 1.5rem;">
-      <div>
-        <h3 style="color: var(--accent);">Claude.ai(消費端)</h3>
-        <div class="compare-bar">
-          <div class="compare-bar-label"><span>Augmentation 擴增</span><span>52%</span></div>
-          <div class="compare-bar-track"><div class="compare-bar-fill" style="width: 52%"></div></div>
-        </div>
-        <div class="compare-bar">
-          <div class="compare-bar-label"><span>Automation 自動化</span><span>45%</span></div>
-          <div class="compare-bar-track"><div class="compare-bar-fill blue" style="width: 45%"></div></div>
-        </div>
-      </div>
-
-      <div>
-        <h3 style="color: var(--blue);">1P API(企業端)</h3>
-        <div class="compare-bar">
-          <div class="compare-bar-label"><span>Augmentation 擴增</span><span>~25%</span></div>
-          <div class="compare-bar-track"><div class="compare-bar-fill" style="width: 25%"></div></div>
-        </div>
-        <div class="compare-bar">
-          <div class="compare-bar-label"><span>Automation 自動化</span><span>~75%</span></div>
-          <div class="compare-bar-track"><div class="compare-bar-fill blue" style="width: 75%"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bottom-note">
-      消費端是<span class="accent">人機協作</span>，企業端是<span class="accent">系統自動化</span>。
-    </div>
-  </section>
-
-  <!-- ==================== 9. 觀察 4: 任務時長 vs 成功率 ==================== -->
-  <section class="slide alt compact">
-    <div class="slide-num">10 / 28</div>
-    <div class="slide-tag">觀察 4 · 能力邊界</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">觀察 4</span>
-    <h1 class="h-bold-sans">越複雜的任務，加速越多 —<br>但失敗也越多</h1>
-    <p class="lede" style="margin-top: 1rem;">這個取捨很重要 — 它直接影響哪些工作適合交給 Agent。</p>
-
-    <div class="stat-grid">
-      <div class="stat">
-        <div class="stat-num blue smaller">3.5 小時</div>
-        <div class="stat-label">API 端 50% 成功率對應的任務時長</div>
-        <div class="stat-delta">超過這長度就有一半會失敗</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num accent smaller">19 小時</div>
-        <div class="stat-label">Claude.ai 端外推的 50% 成功率時長</div>
-        <div class="stat-delta">多輪對話讓人能拆解問題</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num smaller">12×</div>
-        <div class="stat-label">大學程度任務的加速倍數</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num accent smaller">66%</div>
-        <div class="stat-label">大學程度任務的成功率</div>
-        <div class="stat-delta">越專業越容易失敗</div>
-      </div>
-    </div>
-
-    <h2>「Task Horizon」是 AI 進步的關鍵指標</h2>
-
-    <p>METR 基準顯示 Claude Sonnet 4.5 在軟工任務上的 50% 成功率對應 ~2 小時，Opus 4.5 約 5 小時。<strong>每代模型大約讓這個時長翻倍</strong>。</p>
-
-    <div class="card-tinted">
-      <div class="card-title">為什麼 Claude.ai 比 API 高這麼多？</div>
-      <p style="margin-bottom: 0;">
-        因為消費端可以多輪對話 — <mark>多輪對話本身就是「任務拆解工具」</mark>。把一個 19 小時的問題，拆成許多 30 分鐘的問題，一個個來。但 API 是單輪、一次定生死。
-      </p>
-    </div>
-
-    <div class="bottom-note">
-      AI <span class="accent">加速很大</span>，但「驗證」是新的瓶頸 — 越複雜的任務越需要人工把關。
-    </div>
-  </section>
-
-  <!-- ==================== 10. 觀察 5: 生產力推估打折 ==================== -->
-  <section class="slide compact">
-    <div class="slide-num">11 / 28</div>
-    <div class="slide-tag">觀察 5 · 生產力</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">觀察 5</span>
-    <h1 class="h-bold-sans">「生產力提升 1.8%」<br>納入成功率後，只剩 1.0%</h1>
-    <p class="lede" style="margin-top: 1rem;">Anthropic 自己對自己的生產力推估做了三層打折，結論值得看。<br><span style="font-size: 0.85rem; color: var(--ink-muted);">註：這裡的「個百分點」指<strong>年化勞動生產力成長率</strong>，也就是每年人均產出成長速度，美國長期約 1-2%。</span></p>
-
-    <table>
-      <thead>
-        <tr><th>情境</th><th>Claude.ai</th><th>1P API</th><th>說明</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="label">原始基準</td>
-          <td class="num">+1.8 個百分點</td>
-          <td class="num">+1.8 個百分點</td>
-          <td>純看時間節省</td>
-        </tr>
-        <tr>
-          <td class="label">+ 成功率折扣</td>
-          <td class="num" style="color: var(--accent);">+1.2 個百分點</td>
-          <td class="num" style="color: var(--accent);">+1.0 個百分點</td>
-          <td>不是每次都成功，要折扣</td>
-        </tr>
-        <tr>
-          <td class="label">+ 任務瓶頸折扣</td>
-          <td class="num" style="color: var(--accent);">+0.8 個百分點</td>
-          <td class="num" style="color: var(--accent);">+0.6 個百分點</td>
-          <td>有些任務 AI 加速不了，卡住整體</td>
-        </tr>
-        <tr>
-          <td class="label">+ 任務專業化</td>
-          <td class="num" style="color: var(--green);">+2.2 個百分點</td>
-          <td class="num" style="color: var(--green);">+2.6 個百分點</td>
-          <td>勞工專注 AI 加速最多的任務</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="two-col">
-      <div class="card-blue">
-        <div class="card-title">即使打折也很大</div>
-        <p style="margin-bottom: 0;">+1.0 個百分點的<strong>年化勞動生產力成長率</strong>，就足以讓美國回到 1990 年代末的高成長時代。歷史上算很罕見的擴張。</p>
-      </div>
-      <div class="card-tinted">
-        <div class="card-title">瓶頸任務是隱憂</div>
-        <p style="margin-bottom: 0;">老師可以用 AI 高效備課，但減少不了課堂時間。<strong>有些任務 AI 短期內無法加速，會卡住整體生產力提升</strong>。</p>
-      </div>
-    </div>
-
-    <div class="bottom-note">
-      別只看「節省了多少時間」 — 要看「<span class="accent">節省下的時間 × 成功率</span>」。
-    </div>
-  </section>
-
-  <!-- ==================== 11. 觀察 6: 學習曲線 ==================== -->
-  <section class="slide alt compact">
-    <div class="slide-num">12 / 28</div>
-    <div class="slide-tag">觀察 6 · 學習曲線</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">觀察 6 · 3 月報告最重要的單一發現</span>
-    <h1 class="h-bold-sans">高資歷使用者的成功率<br>高出 10%</h1>
-    <p class="lede" style="margin-top: 1rem;">這不是因為他們做不同的事 — 是因為他們學會「怎麼跟 AI 工作」。</p>
-
-    <h2>迴歸結果(成功率對「高資歷」指標)</h2>
-
-    <table>
-      <colgroup>
-        <col style="width: 40%;">
-        <col style="width: 20%;">
-        <col style="width: 40%;">
-      </colgroup>
-      <thead>
-        <tr><th>模型規格</th><th style="text-align: center;">效應(百分點)</th><th>解讀</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="label">(1) 雙變量(無控制)</td>
-          <td class="num" style="text-align: center;">+5 pp</td>
-          <td>原始效應</td>
-        </tr>
-        <tr>
-          <td class="label">(2) + 任務固定效應</td>
-          <td class="num" style="text-align: center;">+3 pp</td>
-          <td>同一任務內比較，效應減弱但仍在</td>
-        </tr>
-        <tr>
-          <td class="label">(3) + 全控制(模型、語言、國家)</td>
-          <td class="num" style="color: var(--accent); text-align: center;">+4 pp</td>
-          <td>差距未消失，反而略增</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="two-col" style="margin-top: 1.5rem;">
-      <div>
-        <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 7h6v6" /> <path d="m22 7-8.5 8.5-5-5L2 17" /> </svg> 隨年資增長的指標</h3>
-        <ul class="bullet-list">
-          <li>每多用 1 年，prompt 教育水準 +1 年</li>
-          <li>工作用途比例：+7 pp</li>
-          <li>使用任務多元度：+1.5 pp</li>
-        </ul>
-      </div>
-      <div>
-        <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 17h6v-6" /> <path d="m22 17-8.5-8.5-5 5L2 7" /> </svg> 隨年資下降的指標</h3>
-        <ul class="bullet-list">
-          <li>個人用途:44% → 38%</li>
-          <li>指令式委派：減少</li>
-          <li>單次性任務：減少</li>
-        </ul>
-      </div>
-    </div>
-
-    
-  </section>
-
-  <!-- ==================== 12. 觀察 7: 去技能化 ==================== -->
-  <section class="slide compact">
-    <div class="slide-num">13 / 28</div>
-    <div class="slide-tag">觀察 7 · 去技能化</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">觀察 7 · 最值得警覺的發現</span>
-    <h1 class="h-bold-sans">AI 拿走的，<br>都是「需要技能」的部分</h1>
-    <p class="lede" style="margin-top: 1rem;">這個發現跟直覺相反 — AI 拿走的不是低薪、低技能的工作。</p>
-
-    <div class="stat-grid">
-      <div class="stat">
-        <div class="stat-num smaller">13.2 年</div>
-        <div class="stat-label">經濟體所有任務的平均教育需求</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num accent smaller">14.4 年</div>
-        <div class="stat-label">Claude 處理任務的平均教育需求</div>
-        <div class="stat-delta">比整體高 1.2 年(接近學士程度)</div>
-      </div>
-    </div>
-
-    <h2>具體案例：技術寫手的工作怎麼變？</h2>
-
-    <div class="two-col">
-      <div class="card-tinted">
-        <div class="card-title">⬆ AI 拿走(高技能)</div>
-        <ul class="bullet-list">
-          <li>分析發展、判斷修訂需求(18.7 年)</li>
-          <li>檢視出版品、建議格式調整(16.4 年)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">⬇ 留給人(低技能)</div>
-        <ul class="bullet-list">
-          <li>畫示意圖(13.6 年)</li>
-          <li>觀察生產活動(13.5 年)</li>
-        </ul>
-      </div>
-    </div>
-
-    <h2>少數職業反而升技能化</h2>
-
-    <div class="card-green">
-      <div class="card-title">房地產經理</div>
-      <p style="margin-bottom: 0;">
-        AI 接走<strong>低教育需求的例行行政</strong>(12-13 年教育就能做的事，如維護紀錄、比對租金)，<strong>留下高教育需求的判斷工作</strong>(15+ 年才能做，如取得貸款、與建築師議約、董事會會議)。<br>這是少數例外 — 但只有「原本就需要複雜協作」的職位才能變這樣。
-      </p>
-    </div>
-
-    <div class="bottom-note">
-      預測：技術寫手與旅行社員<span class="accent">工資下降但就業上升</span>；房地產經理<span class="accent">就業下降但工資上升</span>。
-    </div>
-  </section>
-
-  <!-- ==================== 13. 美國 vs 全球擴散 ==================== -->
-  <section class="slide alt compact">
-    <div class="slide-num">14 / 28</div>
-    <div class="slide-tag">補充觀察 · 地理</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">補充觀察</span>
-    <h1 class="h-bold-sans">美國各州在快速收斂，<br>但跨國差距正在擴大</h1>
-
-    <div class="two-col" style="margin-top: 2rem;">
-      <div class="card-green">
-        <div class="card-title">🇺🇸 美國州際：快速收斂</div>
-        <div style="font-family: var(--serif); font-weight: 800; font-size: 2.4rem; color: var(--green); margin: 0.8rem 0;">5-9 年</div>
-        <div class="stat-label">預估達到人均使用平等的時間</div>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">Gini 從 0.37 → 0.32(三個月內)。比 20 世紀重大技術擴散<strong>快約 10 倍</strong>。</p>
-      </div>
-
-      <div class="card-tinted">
-        <div class="card-title"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /> <path d="M2 12h20" /> </svg> 跨國：差距擴大</div>
-        <div style="font-family: var(--serif); font-weight: 800; font-size: 2.4rem; color: var(--accent); margin: 0.8rem 0;">45% → 48%</div>
-        <div class="stat-label">前 20 國佔人均使用比重變化</div>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">前五大使用國：美國、印度、日本、英國、南韓。GDP per capita 仍是強烈解釋變數(每 +1% GDP → +0.7% 使用)。</p>
-      </div>
-    </div>
-
-    <h2>使用情境也隨富裕度分化</h2>
-
-    <div class="three-col">
-      <div class="card">
-        <div class="card-title" style="color: var(--accent);"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /> <path d="M22 10v6" /> <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /> </svg> 學業用途</div>
-        <p style="margin-bottom: 0; font-size: 0.95rem;">在<strong>低收入國家最高</strong>。免費版能滿足課業需求，專業任務通常需付費。</p>
-      </div>
-      <div class="card">
-        <div class="card-title" style="color: var(--blue);"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /> <rect width="20" height="14" x="2" y="6" rx="2" /> </svg> 工作用途</div>
-        <p style="margin-bottom: 0; font-size: 0.95rem;">在<strong>中高收入國家最高</strong>。巴爾幹半島與巴西意外名列前茅。</p>
-      </div>
-      <div class="card">
-        <div class="card-title" style="color: var(--green);"><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /> </svg> 個人用途</div>
-        <p style="margin-bottom: 0; font-size: 0.95rem;">在<strong>高收入國家最高</strong>。富國使用者用 AI 處理生活雜務。</p>
-      </div>
-    </div>
-
-    <div class="bottom-note">
-      AI 不會拉近全球差距 — <span class="accent">會放大原本就有的差距</span>。
-    </div>
-  </section>
-
-  <!-- ==================== 14. 模型選擇行為 ==================== -->
-  <section class="slide compact">
-    <div class="slide-num">15 / 28</div>
-    <div class="slide-tag">補充觀察 · 模型選擇</div>
-
-    <div class="section-mark"></div>
-    <span class="eyebrow">補充觀察 · 使用者其實很理性</span>
-    <h1 class="h-bold-sans">使用者會依任務難度切模型 —<br>API 用戶比 Web 用戶敏感 2 倍</h1>
-
-    <h2>付費 Claude.ai 用戶 Opus 使用率(整體 51%)</h2>
-
-    <table>
-      <colgroup>
-        <col style="width: 40%;">
-        <col style="width: 25%;">
-        <col style="width: 35%;">
-      </colgroup>
-      <thead>
-        <tr><th>任務類別</th><th style="text-align: center;">Opus 使用率</th><th style="text-align: center;">差距(對比平均)</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="label">電腦數學任務(編碼)</td>
-          <td class="num" style="text-align: center;">55%</td>
-          <td class="num" style="color: var(--green); text-align: center;">+4.4 pp</td>
-        </tr>
-        <tr>
-          <td class="label">教育/輔導任務</td>
-          <td class="num" style="text-align: center;">45%</td>
-          <td class="num" style="color: var(--accent); text-align: center;">-7 pp</td>
-        </tr>
-        <tr>
-          <td class="label">家教任務</td>
-          <td class="num" style="text-align: center;">12%</td>
-          <td class="num" style="color: var(--accent); text-align: center;">遠低於平均</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>價值彈性：時薪 vs Opus 使用率</h2>
-
-    <div class="two-col">
-      <div class="card-tinted">
-        <div class="card-title">Claude.ai 用戶</div>
-        <div class="stat-num accent smaller">+1.5 pp</div>
-        <div class="stat-label">時薪每 +$10,Opus 使用率上升幅度</div>
-      </div>
-      <div class="card-blue">
-        <div class="card-title">1P API 用戶</div>
-        <div class="stat-num blue smaller">+2.8 pp</div>
-        <div class="stat-label">幾乎是 Claude.ai 的兩倍敏感</div>
-      </div>
-    </div>
-
-    
-  </section>
-
-  <!-- ==================== 15. 七個觀察整理 ==================== -->
-  <section class="slide alt compact">
-    <div class="slide-num">16 / 28</div>
-    <div class="slide-tag">中段整理 · RECAP</div>
-
-    <div class="section-mark"></div>
-    <h1 class="h-bold-sans">七個觀察，一張表看完</h1>
-
-    <table style="margin-top: 1.5rem;">
-      <thead>
-        <tr>
-          <th style="width: 5%;">#</th>
-          <th style="width: 30%;">觀察</th>
-          <th>關鍵數字</th>
-          <th>啟示</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="num">1</td>
-          <td class="label">使用集中於少數任務</td>
-          <td class="num">API 32.6%</td>
-          <td>整個軟工生命週期都在 API 上</td>
-        </tr>
-        <tr>
-          <td class="num">2</td>
-          <td class="label">prompt 決定 response 水準</td>
-          <td class="num">r > 0.92</td>
-          <td>使用 AI 的能力本身就是能力</td>
-        </tr>
-        <tr>
-          <td class="num">3</td>
-          <td class="label">擴增 vs 自動化分化</td>
-          <td class="num">52% / 75%</td>
-          <td>消費端協作 / 企業端自動化</td>
-        </tr>
-        <tr>
-          <td class="num">4</td>
-          <td class="label">複雜任務加速大、成功率低</td>
-          <td class="num">12× / 66%</td>
-          <td>驗證是新瓶頸</td>
-        </tr>
-        <tr>
-          <td class="num">5</td>
-          <td class="label">生產力推估要打折</td>
-          <td class="num">1.8 → 1.0 pp</td>
-          <td>別只看時間節省</td>
-        </tr>
-        <tr>
-          <td class="num">6</td>
-          <td class="label">有學習曲線</td>
-          <td class="num">+10% 成功率</td>
-          <td>onboarding 是差異化關鍵</td>
-        </tr>
-        <tr>
-          <td class="num">7</td>
-          <td class="label">去技能化效應</td>
-          <td class="num">14.4 / 13.2 年</td>
-          <td>AI 拿走的是高技能部分</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="bottom-note">
-      數據已經很清楚 — 但<span class="accent">資料給不出下一步</span>。
-    </div>
-  </section>
-
-  <!-- ==================== 章節分隔: 反思 ==================== -->
-  <section class="slide section-divider compact">
-    <div class="slide-num">17 / 28</div>
-    <div class="slide-tag">PART II · 回應</div>
-
-    <div style="margin-top: auto; margin-bottom: auto;">
-      <span class="eyebrow">第二段 · 回到一開始的問題</span>
-      <h1 class="h-display">
-        那我們<br>
-        還剩下<br>
-        <span class="accent italic">什麼？</span>
-      </h1>
-      <hr class="rule-thick">
-      <p class="lede" style="margin-top: 2rem; max-width: 700px;">
-        當機器越做越多、做得越好，人類的價值放在哪裡？<br>這是資料給不出答案的問題 — 但不能不答。
-      </p>
-    </div>
-  </section>
-
-  <!-- ==================== 16. 五件還剩的事 ==================== -->
-  <section class="slide compact">
-    <div class="slide-num">18 / 28</div>
-    <div class="slide-tag">回應 · 五件事</div>
-
-    <div class="section-mark"></div>
-    <h1 class="h-bold-sans">資料告訴我：這五件事還在我們手上</h1>
-    <p class="lede" style="margin-top: 1rem;">每一件都對應到前面的觀察 — 都是資料支持的結論，不是個人感想。</p>
-
-    <div class="numbered-list" style="margin-top: 2rem;">
-      <div class="numbered-item">
-        <div class="num">01</div>
-        <div class="numbered-title">標準</div>
-        <div class="numbered-desc">什麼叫「夠好」、什麼叫「不能交付」?觀察 4 顯示成功率隨複雜度下降 — 必須有人定義「驗證標準」。</div>
-      </div>
-      <div class="numbered-item">
-        <div class="num">02</div>
-        <div class="numbered-title">脈絡</div>
-        <div class="numbered-desc">為什麼做這個、為什麼是現在？觀察 2(r > 0.92)告訴我們：你給什麼脈絡，它就給什麼回答。脈絡是輸入端的責任。</div>
-      </div>
-      <div class="numbered-item">
-        <div class="num">03</div>
-        <div class="numbered-title">取捨</div>
-        <div class="numbered-desc">兩邊都有道理時，必須有人決定<strong>哪個更重要</strong>。速度 vs 品質、短期 vs 長期 — 觀察 5 的生產力打折就是這種事。AI 算不出價值排序。</div>
-      </div>
-      <div class="numbered-item">
-        <div class="num">04</div>
-        <div class="numbered-title">判斷</div>
-        <div class="numbered-desc">資訊永遠不完整時，必須有人在<strong>迷霧中下決定</strong>。資料說 A，直覺說 B，經驗說 C — 該信哪個?觀察 7 顯示 AI 拿走的就是這層，必須主動把它留下來。</div>
-      </div>
-      <div class="numbered-item">
-        <div class="num">05</div>
-        <div class="numbered-title">責任</div>
-        <div class="numbered-desc">事情出錯，沒有「是 AI 做的」這個說法。法律上、團隊文化上都不允許。</div>
-      </div>
-    </div>
-
-    <div class="bottom-note">
-      共通點：<span class="accent">都不是「做事」</span>，都是<span class="accent">「想清楚」</span>。這就是資料給我們的答案。
-    </div>
-  </section>
   <!-- ==================== 19A. Brainstorming SOP(從五件事到操作手冊) ==================== -->
   <section class="slide compact">
     <div class="slide-num">19 / 28</div>

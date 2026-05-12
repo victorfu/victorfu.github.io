@@ -848,6 +848,14 @@
     margin-bottom: 0.5rem;
   }
 
+  /* slide 2 (AEI 資料介紹) 字級放大,演講用 */
+  .slide-data.compact .lede { font-size: 1.32rem; line-height: 1.55; }
+  .slide-data.compact h3 { font-size: 1.18rem; }
+  .slide-data.compact ul.bullet-list li { font-size: 1.05rem; line-height: 1.5; }
+  .slide-data.compact .flow-node { font-size: 1rem; padding: 1rem 1.2rem; }
+  .slide-data.compact .card-tinted p { font-size: 1.05rem; line-height: 1.55; }
+  .slide-data.compact h2 { font-size: 1.32rem; }
+
   /* SOP 步驟卡片 */
   .sop-step {
     border: 1px solid var(--rule);
@@ -856,19 +864,22 @@
     background: rgba(255, 255, 255, 0.02);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 0.4rem;
+    aspect-ratio: 1 / 1;
   }
   .sop-step .sop-num {
     font-family: var(--mono);
-    font-size: 0.7rem;
+    font-size: 1.4rem;
     color: var(--accent);
-    letter-spacing: 0.1em;
-    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    line-height: 1;
   }
   .sop-step .sop-title {
     font-family: var(--sans);
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1.5rem;
     color: var(--ink);
     line-height: 1.2;
   }
@@ -1027,13 +1038,9 @@
       <div class="cover-text">
         <div class="section-mark"></div>
 
-        <h1 class="h-bold-sans" style="font-size: clamp(1.8rem, 3.2vw, 2.8rem); margin-bottom: 2rem;">
+        <h1 class="h-bold-sans" style="font-size: clamp(2.2rem, 4.2vw, 3.6rem); line-height: 1.2; margin-bottom: 3rem; white-space: nowrap;">
           當 AI 開始做事，<br>我們還剩下什麼？
         </h1>
-
-        <p style="font-size: 1.15rem; color: var(--ink-soft); margin-bottom: 3rem; line-height: 1.5;">
-          從 200 萬筆對話資料，<br>看 AI Agent 真實使用樣貌
-        </p>
 
         <p style="font-family: var(--mono); font-size: 0.85rem; color: var(--ink-muted); letter-spacing: 0.05em;">
           Victor Fu &nbsp;·&nbsp; VP of Engineering<br>2026 內部技術分享
@@ -1049,7 +1056,7 @@
   
 
   <!-- ==================== 3. 為什麼用這份資料 ==================== -->
-  <section class="slide alt compact">
+  <section class="slide alt compact slide-data">
     <div class="slide-num">02 / 17</div>
     <div class="slide-tag">資料介紹 · DATA</div>
 
@@ -1388,13 +1395,13 @@
     </p>
 
     <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.8rem; margin: 1.6rem 0 1.2rem;">
-      <div class="sop-step"><div class="sop-num">01</div><div class="sop-title">先卡住</div><div class="sop-desc">在 prompt 加禁止語，不准跳到實作</div></div>
-      <div class="sop-step"><div class="sop-num">02</div><div class="sop-title">讀現況</div><div class="sop-desc">逼它先讀檔案、commit、文件，別從零猜</div></div>
-      <div class="sop-step"><div class="sop-num">03</div><div class="sop-title">一次一題</div><div class="sop-desc">拒絕「給我 5 個需求」，要它逐題問</div></div>
-      <div class="sop-step"><div class="sop-num">04</div><div class="sop-title">2-3 方案</div><div class="sop-desc">不接受單一推薦，要看到它沒選的選項</div></div>
-      <div class="sop-step"><div class="sop-num">05</div><div class="sop-title">段段確認</div><div class="sop-desc">設計拆成小塊，每塊都要過關</div></div>
-      <div class="sop-step"><div class="sop-num">06</div><div class="sop-title">寫下來</div><div class="sop-desc">對話結論寫成 spec，沒寫的不算決定</div></div>
-      <div class="sop-step"><div class="sop-num">07</div><div class="sop-title">兩道把關</div><div class="sop-desc">它先自審，你再審，才開始寫 code</div></div>
+      <div class="sop-step"><div class="sop-num">01</div><div class="sop-title">先卡住</div></div>
+      <div class="sop-step"><div class="sop-num">02</div><div class="sop-title">讀現況</div></div>
+      <div class="sop-step"><div class="sop-num">03</div><div class="sop-title">一次一題</div></div>
+      <div class="sop-step"><div class="sop-num">04</div><div class="sop-title">2-3 方案</div></div>
+      <div class="sop-step"><div class="sop-num">05</div><div class="sop-title">段段確認</div></div>
+      <div class="sop-step"><div class="sop-num">06</div><div class="sop-title">寫下來</div></div>
+      <div class="sop-step"><div class="sop-num">07</div><div class="sop-title">審核把關</div></div>
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 0.8rem 0 1rem;">
@@ -1434,15 +1441,15 @@
     </div>
 
     <!-- 中文展開 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 0.4rem;">這在做什麼？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">在 prompt 開頭就明文禁止 AI 跳到實作。<strong>不准寫 code、不准跑工具、不准 scaffold 專案</strong>，直到「設計拿給人看，人核可」這兩個動作完成。<br><br>關鍵在「<strong>EVERY project regardless of perceived simplicity</strong>」 — 即使是一個小 todo list、一個設定檔修改，也走完這個流程。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem;">這在做什麼？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">在 prompt 開頭明文禁止 AI 跳到實作 — <strong>不准寫 code、不准跑工具</strong>，直到設計被人核可。<br><br>關鍵字是「<strong>EVERY project regardless of perceived simplicity</strong>」 — 再小的修改也要走完流程。</div>
     </div>
 
     <!-- 逆 sycophancy 角度 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: #6db5ff; margin-bottom: 0.4rem;">為什麼這樣設計？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">這是<strong>整個 SOP 的硬閘門</strong>。沒有它，AI 預設會「邊問邊做」 — 一邊澄清需求一邊已經產出半成品。HARD-GATE 把「先做一點」這條退路堵死。<br>另一個關鍵是同段裡的 anti-pattern：<strong>「這個太簡單不需要設計」</strong>是最常被 AI 用來偷渡 sycophancy 的藉口。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: #6db5ff; margin-bottom: 0.5rem;">為什麼這樣設計？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">這是<strong>整個 SOP 的硬閘門</strong>。沒有它，AI 會「邊問邊做」 — 一邊澄清需求一邊產出半成品，HARD-GATE 把這條退路堵死。<br>同段的 anti-pattern：<strong>「這個太簡單不需要設計」</strong>是最常被 AI 拿來偷渡 sycophancy 的藉口。</div>
     </div>
 
     <div class="bottom-note">沒有設計核可，就沒有實作 — <span class="accent">無論專案多小</span>。</div>
@@ -1465,15 +1472,15 @@
     </div>
 
     <!-- 中文展開 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 0.4rem;">這在做什麼？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">在問問題之前，先讓 AI 自己去看：<strong>專案的檔案結構、文件、最近的 commit 訊息</strong>。<br><br>SKILL.md 還補充：「<em>before asking detailed questions, assess scope</em>」 — 如果這個需求其實要拆成多個子系統，馬上 flag，不要在錯的範疇上浪費問題。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem;">這在做什麼？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">在問問題之前，先讓 AI 看 <strong>專案檔案、文件、最近的 commit</strong>。<br><br>SKILL.md 補充：「<em>before asking detailed questions, assess scope</em>」 — 如果需求要拆成多個子系統，馬上 flag。</div>
     </div>
 
     <!-- 逆 sycophancy 角度 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: #6db5ff; margin-bottom: 0.4rem;">為什麼這樣設計？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">AI 預設會從你的一句話 prompt 直接構思，不會主動去理解現況。結果常常做出「跟現有專案不協調」的設計。<br>強制讀現況 = 強制 AI 把<strong>專案的既有 patterns、命名慣例、架構決策</strong>納入設計，避免「重新發明輪子」。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: #6db5ff; margin-bottom: 0.5rem;">為什麼這樣設計？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">AI 預設會從一句話 prompt 直接構思，不主動理解現況 — 結果做出「跟現有專案不協調」的設計。<br>強制讀現況 = 強制 AI 把<strong>既有 patterns、命名慣例、架構決策</strong>納入設計，避免「重新發明輪子」。</div>
     </div>
 
     <div class="bottom-note">AI 預設不會自己探索 — <span class="accent">你要明確要求它先讀</span>。</div>
@@ -1496,15 +1503,15 @@
     </div>
 
     <!-- 中文展開 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 0.4rem;">這在做什麼？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">一次只問一個問題，不要「請給我 5 個需求」這種 bulk 問法。<strong>偏好多選題</strong>(easier to answer，且強迫對方在你的選項邊界內決定)。<br><br>聚焦三件事：<strong>purpose</strong>(為什麼做)、<strong>constraints</strong>(限制條件)、<strong>success criteria</strong>(怎麼算成功)。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem;">這在做什麼？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">一次只問一個問題，不要 bulk 問。<strong>偏好多選題</strong> — 強迫對方在你的選項邊界內決定。<br><br>聚焦三件事：<strong>purpose</strong>(為什麼)、<strong>constraints</strong>(限制)、<strong>success criteria</strong>(成功標準)。</div>
     </div>
 
     <!-- 逆 sycophancy 角度 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: #6db5ff; margin-bottom: 0.4rem;">為什麼這樣設計？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">AI 一次給五個問題，人會挑最簡單的回答 — 真正重要的問題會被略過。「一次一題」強迫真正重要的問題被回答。<br>多選優於開放式，是因為開放式答案會誘發 sycophancy：你寫什麼，AI 就附和什麼。多選讓 AI 必須在離散選項間做出明確判斷。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: #6db5ff; margin-bottom: 0.5rem;">為什麼這樣設計？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">AI 一次給五個問題，人會挑最簡單的答 — 重要的問題被略過。「一次一題」強迫重要的被回答。<br>多選優於開放式 — 開放式答案會誘發 sycophancy：你寫什麼 AI 附和什麼。多選逼 AI 在離散選項間做明確判斷。</div>
     </div>
 
     <div class="bottom-note"><span class="accent">資訊壓縮 ≠ 效率</span> — 一次一題才能逼出真實答案。</div>
@@ -1527,15 +1534,15 @@
     </div>
 
     <!-- 中文展開 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 0.4rem;">這在做什麼？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">不接受單一推薦。AI 必須<strong>提出 2-3 個不同方案</strong>，每個都附上 trade-offs。<br><br>呈現方式：<strong>先給推薦的那個</strong>，並解釋為什麼推薦，再列出其他方案。觀眾(也就是你)看完才有依據判斷。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem;">這在做什麼？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">不接受單一推薦。AI 必須<strong>提 2-3 個方案</strong>，每個附上 trade-offs。<br><br>呈現方式：<strong>先給推薦的那個</strong>並解釋原因，再列其他方案。看完才有依據判斷。</div>
     </div>
 
     <!-- 逆 sycophancy 角度 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: #6db5ff; margin-bottom: 0.4rem;">為什麼這樣設計？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">這是<strong>整個 SOP 中最直接反 sycophancy 的一步</strong>。<br>AI 預設會給「你最可能想聽的答案」 — 你看不到它「沒選的選項」。強制 2-3 方案 = 強制 AI 把<strong>它的 reasoning 攤開</strong>，讓你看到：「啊原來還有方案 B，它沒選是因為 X」。<br>這也讓你有機會說：「X 不是問題，我反而想要 B」 — 否則 A 已經被 default 了。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: #6db5ff; margin-bottom: 0.5rem;">為什麼這樣設計？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);"><strong>整個 SOP 中最直接反 sycophancy 的一步</strong>。AI 預設給「你最想聽的答案」 — 你看不到它「沒選的選項」。<br>強制 2-3 方案 = 強制 AI 把 <strong>reasoning 攤開</strong>，讓你看到「原來還有方案 B，它沒選是因為 X」。<br>你也有機會說「X 不是問題，我反而想要 B」 — 否則 A 已被 default。</div>
     </div>
 
     <div class="bottom-note">看見 AI <span class="accent">沒選的選項</span>，才看得到它的判斷依據。</div>
@@ -1558,15 +1565,15 @@
     </div>
 
     <!-- 中文展開 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 0.4rem;">這在做什麼？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">設計拆成<strong>多個段落</strong>呈現，<strong>每段問一次「這樣對嗎」</strong>。簡單的段落幾句話，複雜的最多 200-300 字。<br><br>標準的設計章節：architecture、components、data flow、error handling、testing — 每段都要過關，才繼續下一段。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem;">這在做什麼？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">設計拆成<strong>多個段落</strong>呈現，<strong>每段問一次「這樣對嗎」</strong>。簡單幾句話，複雜的 200-300 字。<br><br>標準章節：architecture、components、data flow、error handling、testing — 每段過關才繼續。</div>
     </div>
 
     <!-- 逆 sycophancy 角度 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: #6db5ff; margin-bottom: 0.4rem;">為什麼這樣設計？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">如果整套設計寫完才給人看，會發生兩件事：<br><strong>(1)</strong> 人類傾向 yes/no 整體，不會細看 — sycophancy 反向，人會「客氣地通過」。<br><strong>(2)</strong> 如果某段方向錯了，後面的段落全部基於錯誤前提，重做成本爆炸。<br>段段確認讓<strong>錯誤被早期攔截</strong>，也降低 review 的心理門檻。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: #6db5ff; margin-bottom: 0.5rem;">為什麼這樣設計？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">整套設計寫完才給看，會發生兩件事：<br><strong>(1)</strong> 人會 yes/no 整體、不細看 — sycophancy 反向，「客氣地通過」。<br><strong>(2)</strong> 某段方向錯，後面段落都基於錯誤前提，重做成本爆炸。<br>段段確認讓<strong>錯誤被早期攔截</strong>，也降低 review 的心理門檻。</div>
     </div>
 
     <div class="bottom-note"><span class="accent">每段都過關</span>，才能避免整套被「客氣地通過」。</div>
@@ -1589,15 +1596,15 @@
     </div>
 
     <!-- 中文展開 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 0.4rem;">這在做什麼？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">所有對話結論，<strong>寫成 spec 文件</strong>，存到 git。路徑明確規範：<code style="font-family: var(--mono); font-size: 0.85em;">docs/superpowers/specs/YYYY-MM-DD-&lt;topic&gt;-design.md</code><br><br>不只是備忘 — 這個檔案是<strong>後續所有 implementation 的 ground truth</strong>。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem;">這在做什麼？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">所有對話結論，<strong>寫成 spec 文件</strong>存到 git。路徑規範：<code style="font-family: var(--mono); font-size: 0.85em;">docs/superpowers/specs/YYYY-MM-DD-&lt;topic&gt;-design.md</code><br><br>不只是備忘 — 這個檔案是<strong>後續 implementation 的 ground truth</strong>。</div>
     </div>
 
     <!-- 逆 sycophancy 角度 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: #6db5ff; margin-bottom: 0.4rem;">為什麼這樣設計？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">口頭共識會在實作時走樣。三天後 AI 重新讀對話 context，很可能<strong>對「我們之前同意了什麼」記不清楚</strong>。<br>寫成 git-tracked 文件後，三件事固化下來：<br>(1) <strong>不會被偷偷改</strong>(git history 攔得到)<br>(2) <strong>可以被另一個 AI 讀</strong>(handoff 不會失真)<br>(3) <strong>可以 review</strong>(下一步就是)</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: #6db5ff; margin-bottom: 0.5rem;">為什麼這樣設計？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">口頭共識會走樣、AI 也會忘 — 寫成 git-tracked 文件，三件事就固化：<br><strong style="color: var(--accent);">(1)</strong> <strong>不會被偷偷改</strong><br><strong style="color: var(--accent);">(2)</strong> <strong>可被另一個 AI 讀</strong><br><strong style="color: var(--accent);">(3)</strong> <strong>可 review</strong></div>
     </div>
 
     <div class="bottom-note"><span class="accent">沒寫下來的不算決定</span> — 對 AI 對人都一樣。</div>
@@ -1620,81 +1627,51 @@
     </div>
 
     <!-- 中文展開 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 0.4rem;">這在做什麼？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);">這一步實際上包含<strong>三個動作</strong>：<br><strong>(1) AI 自審</strong> — 用四個 lens 檢查：placeholder(TBD/TODO)、矛盾、scope 過大、模糊處。有問題當場修。<br><strong>(2) 使用者把關</strong> — spec 寫完傳給人 review，有改動回到第 6 步重來。<br><strong>(3) 才進實作</strong> — 連實作都不直接寫 code，是 invoke <em>writing-plans</em> skill 先寫實作計畫。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: var(--accent); margin-bottom: 0.5rem;">這在做什麼？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);">三個動作：<br><strong style="color: var(--accent);">(1)</strong> <strong>AI 自審</strong> — placeholder、矛盾、scope、模糊處，四個 lens 自己檢查。<br><strong style="color: var(--accent);">(2)</strong> <strong>使用者把關</strong> — spec 給人 review，要改回第 6 步。<br><strong style="color: var(--accent);">(3)</strong> <strong>進實作</strong> — 不直接寫 code，先 invoke <em>writing-plans</em>。</div>
     </div>
 
     <!-- 逆 sycophancy 角度 -->
-    <div style="margin-top: 0.9rem;">
-      <div style="font-family: var(--sans); font-weight: 700; font-size: 1rem; color: #6db5ff; margin-bottom: 0.4rem;">為什麼這樣設計？</div>
-      <div style="font-size: 0.95rem; line-height: 1.55; color: var(--ink-soft);"><strong>兩道把關，才能對抗 sycophancy 的最後一層</strong>。<br>AI 自審攔下顯而易見的問題(TBD、矛盾)，但這還不夠 — 因為 AI 可能<strong>對自己的 output 有 bias</strong>。所以第二道是人類。<br>最後 SKILL.md 還做了一件聰明的事：brainstorming 的<strong>終點不是「寫 code」</strong>，是「<em>invoking writing-plans</em>」 — 另一個 SOP。這代表 SOP 是<strong>鏈式的</strong>，每個階段都有自己的把關。</div>
+    <div style="margin-top: 1rem;">
+      <div style="font-family: var(--sans); font-weight: 700; font-size: 1.15rem; color: #6db5ff; margin-bottom: 0.5rem;">為什麼這樣設計？</div>
+      <div style="font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft);"><strong>兩道把關 = sycophancy 的最後一道防線</strong>。AI 自審只攔明顯問題，因為 AI 對自己的 output 有 bias — 第二道必須是人。<br>brainstorming 的<strong>終點不是「寫 code」</strong>，是 invoke <em>writing-plans</em> — 另一個 SOP。<strong>SOP 是鏈式的</strong>，每階段都有把關。</div>
     </div>
 
     <div class="bottom-note"><span class="accent">兩道把關 + 鏈式 SOP</span> — 這是「想清楚」工程化的全貌。</div>
   </section>
 
-    <!-- ==================== 20. 第八步:這件事真的值得做嗎 ==================== -->
-  <section class="slide alt compact">
+  <!-- ==================== 19A. 八字 ==================== -->
+  <section class="slide">
     <div class="slide-num">16 / 17</div>
-    <div class="slide-tag">回應 · 還少一步</div>
+    <div class="slide-tag">口訣 · 八字</div>
 
     <div class="section-mark"></div>
-    <span class="eyebrow">SOP 解決得了的，與解決不了的</span>
-    <h1 class="h-bold-sans">七步之外，還有一步</h1>
 
-    <p class="lede" style="margin-top: 1rem; max-width: 950px;">
-      前一頁的 SOP 把「<span class="accent">怎麼做</span>」做得很扎實。
-      但所有 SOP 都默認了一件事 — <span class="accent">「這件事該做」</span>。
-    </p>
+    <!-- 主視覺置中區 -->
+    <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1.8rem;">
 
-    <!-- 對照表:SOP 能解決的 vs 不能解決的 -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0 1.5rem;">
+        <!-- 上聯:謀定後動 -->
+        <div style="display: flex; gap: 1.4rem; font-family: var(--serif); font-weight: 700; font-size: clamp(4rem, 9vw, 7.5rem); line-height: 1.15; color: var(--ink);">
+          <span>謀</span><span>定</span><span>後</span><span>動</span>
+        </div>
 
-      <div class="card-blue">
-        <div class="card-title" style="color: #6db5ff;">✓ 七步 SOP 解決得了</div>
-        <ul class="bullet-list" style="margin-top: 0.8rem;">
-          <li>它是不是真的理解我的需求</li>
-          <li>它有沒有把方案攤開讓你選</li>
-          <li>它寫的東西有沒有過審</li>
-          <li>它的答案品質夠不夠好</li>
-        </ul>
-        <p style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--ink-muted); margin-bottom: 0;">
-          → 這些是<strong>「How」的問題</strong>：怎麼讓 AI 做出對的東西。
-        </p>
+        <!-- 中央分隔:雙線 + 鑽石 -->
+        <div style="display: flex; align-items: center; gap: 1.4rem;">
+          <div style="height: 1px; width: 6rem; background: var(--accent);"></div>
+          <span style="font-family: var(--serif); color: var(--accent); font-size: 1.3rem; line-height: 1;">◆</span>
+          <div style="height: 1px; width: 6rem; background: var(--accent);"></div>
+        </div>
+
+        <!-- 下聯:層層淬鍊 -->
+        <div style="display: flex; gap: 1.4rem; font-family: var(--serif); font-weight: 700; font-size: clamp(4rem, 9vw, 7.5rem); line-height: 1.15; color: var(--ink);">
+          <span>層</span><span>層</span><span>淬</span><span>鍊</span>
+        </div>
+
       </div>
-
-      <div class="card-tinted">
-        <div class="card-title">✗ 七步 SOP 解決不了</div>
-        <ul class="bullet-list" style="margin-top: 0.8rem;">
-          <li>這個任務該不該做</li>
-          <li>為什麼是現在做，不是下個月</li>
-          <li>做完之後，世界會變得更好還是更糟</li>
-          <li>你願不願意為這個決定簽名</li>
-        </ul>
-        <p style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--ink-muted); margin-bottom: 0;">
-          → 這些是<strong>「Why」的問題</strong>：為什麼要做這件事。
-        </p>
-      </div>
-
-    </div>
-
-    <!-- 第八步 -->
-    <div style="margin: 1.2rem 0; padding: 1.3rem 1.6rem; background: rgba(232, 84, 46, 0.08); border-left: 3px solid var(--accent);">
-      <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.4rem;">第 八 步</div>
-      <h2 style="margin: 0; font-size: 1.3rem;">在啟動 SOP 之前問自己：<span class="accent">「這件事，真的值得我花時間做嗎？」</span></h2>
-      <p style="margin-top: 0.6rem; margin-bottom: 0; font-size: 0.95rem;">
-        AI 把每件事的成本從「兩天」降到「兩小時」 — 但這不代表所有事都該做。
-        當「做事」的成本越低，<strong>「選擇做什麼」的權重就越高</strong>。
-      </p>
-    </div>
-
-    <div class="bottom-note">
-      AI 把<span class="accent">「How」</span>變便宜了 — 所以<span class="accent">「Why」</span>變得更貴。
     </div>
   </section>
-
-  
 
   <!-- ==================== 20. 結語反白頁 ==================== -->
   <section class="slide" style="background: var(--ink); color: var(--bg);">

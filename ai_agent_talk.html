@@ -3,7 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>慢即是快 — Victor Fu</title>
+<title>慢即是快：AI Agent 時代的工程領導心法 — Victor Fu</title>
+
+<!-- ==================== GEO / SEO Metadata ==================== -->
+<meta name="description" content="Victor Fu 的 2026 內部技術分享：在 AI Agent 將工程師生產力放大 50% 的時代，為什麼「慢即是快」？包含 Anthropic Economic Index 的七個觀察、七步 SOP 強制思考機制、三道閘門（不准直接做、不准只有一個答案、不准沒留下紀錄），以及四個工程領導體悟。">
+<meta name="keywords" content="AI Agent, AI 工程, Claude Code, Anthropic Economic Index, 慢即是快, AI SOP, AI 協作, 工程領導, Victor Fu, Generative Engine Optimization, AI 時代軟體開發, AI 程式設計, 三道閘門, 七步 SOP">
+<meta name="author" content="Victor Fu">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow">
+<link rel="canonical" href="https://victorfu.github.io/ai_agent_talk.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="慢即是快：AI Agent 時代的工程領導心法">
+<meta property="og:description" content="當 AI 把工程師生產力放大 50%，「想清楚」比「做得快」更重要。一份關於 AI Agent 協作、SOP 化思考、與工程體悟的內部分享。">
+<meta property="og:url" content="https://victorfu.github.io/ai_agent_talk.html">
+<meta property="og:site_name" content="Victor Fu">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://victorfu.github.io/logo.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="慢即是快：AI Agent 時代的工程領導心法">
+<meta name="twitter:description" content="AI 放大 50% 生產力的時代，為什麼「慢」反而是「快」？Victor Fu 的 2026 內部技術分享。">
+<meta name="twitter:image" content="https://victorfu.github.io/logo.png">
+
+<!-- AI / LLM friendly hints -->
+<meta name="article:author" content="Victor Fu">
+<meta name="article:section" content="Engineering Leadership">
+<meta name="article:tag" content="AI Agent">
+<meta name="article:tag" content="Claude Code">
+<meta name="article:tag" content="Engineering Management">
+
+<!-- JSON-LD: Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PresentationDigitalDocument",
+  "name": "慢即是快：AI Agent 時代的工程領導心法",
+  "headline": "慢即是快 — 為什麼 AI 越快，我們越要慢",
+  "inLanguage": "zh-Hant",
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-05-14",
+  "author": {
+    "@type": "Person",
+    "name": "Victor Fu",
+    "jobTitle": "VP of Engineering",
+    "url": "https://victorfu.github.io/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Victor Fu",
+    "url": "https://victorfu.github.io/"
+  },
+  "url": "https://victorfu.github.io/ai_agent_talk.html",
+  "description": "2026 內部技術分享：在 AI Agent 將工程師生產力放大 50% 的時代，為什麼『慢即是快』？涵蓋 Anthropic Economic Index 的七個觀察、七步 SOP、三道閘門、與四個工程體悟。",
+  "about": [
+    {"@type": "Thing", "name": "AI Agent"},
+    {"@type": "Thing", "name": "Claude Code"},
+    {"@type": "Thing", "name": "Engineering Leadership"},
+    {"@type": "Thing", "name": "Software Development Process"}
+  ],
+  "keywords": "AI Agent, Claude Code, Anthropic Economic Index, AI SOP, 工程領導, 慢即是快, Victor Fu"
+}
+</script>
+
+<!-- JSON-LD: FAQ for GEO (helps LLMs extract Q&A) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "為什麼「慢」即是「快」？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "在 AI Agent 將工程師生產力放大約 50% 的時代，做得快變得容易，但做對方向、留下紀錄、可被審核才是真正的速度來源。AI 會放大你既有的工作方式——好的會更好，壞的會更壞，因此先想清楚再動手，反而是最快的路。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI Agent 時代的工程師需要什麼新能力？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anthropic Economic Index 顯示：AI 任務越來越多由 Agent 主動執行（automation 比例上升），對使用者來說，關鍵能力轉向：清楚定義問題、提供脈絡、設定限制、審核產出、把流程文件化。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什麼是「三道閘門」？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "三道閘門是 Victor Fu 提出的 AI 協作硬規則：(1) 不准直接做——AI 必須先讀現況、確認問題；(2) 不准只有一個答案——必須提出 2-3 個方案與取捨；(3) 不准沒留下紀錄——所有決策、假設、變更都必須寫下來。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "七步 SOP 是什麼？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "七步 SOP 是讓 AI 強制慢下來的工程化流程：01 先卡住、02 讀現況、03 一次一題、04 提 2-3 方案、05 段段確認、06 寫下來、07 審核把關。目的是反轉 AI「直接動手做」的本能。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI 把生產力放大 50%，代表什麼？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "+50% 不是均等地分給每個人——AI 是一個放大器。原本流程清楚、會寫規格、會做 code review 的團隊，會被放大成更強的團隊；原本含糊、缺乏紀律的團隊，問題也會被放大。差距會擴大，不會縮小。"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- JSON-LD: Person (author identity, helps LLM attribution) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Victor Fu",
+  "jobTitle": "VP of Engineering",
+  "url": "https://victorfu.github.io/",
+  "sameAs": [
+    "https://victorfu.github.io/"
+  ],
+  "knowsAbout": ["AI Agent", "Claude Code", "Software Engineering", "Engineering Leadership", "Anthropic API"]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -1016,6 +1144,17 @@
   .slide.compact .numbered-item {
     padding: 0.5rem 0;
   }
+  /* GEO: visually hidden but accessible to crawlers / screen readers / LLMs */
+  .geo-sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .slide.compact .numbered-title {
     font-size: 0.95rem;
   }
@@ -1026,6 +1165,54 @@
 </style>
 </head>
 <body>
+
+<!-- ==================== GEO: Semantic Summary (visually hidden) ==================== -->
+<header class="geo-sr-only">
+  <h1>慢即是快：AI Agent 時代的工程領導心法</h1>
+  <p><strong>講者：</strong>Victor Fu，VP of Engineering。<strong>場合：</strong>2026 年內部技術分享。</p>
+  <p><strong>核心論點：</strong>當 AI Agent 將工程師生產力放大約 50%，「想清楚」比「做得快」更重要。AI 是放大器——好的習慣會被放大，壞的習慣也會被放大。因此「慢即是快」：先卡住、先讀現況、先提多個方案、先留下紀錄，才能在 AI 時代真正加速。</p>
+
+  <section>
+    <h2>內容大綱</h2>
+    <ol>
+      <li>封面與引言：為什麼「慢」即是「快」</li>
+      <li>Anthropic Economic Index 分析流程</li>
+      <li>七個觀察：AI 使用模式的演進與 automation 比例上升</li>
+      <li>機制決定一切：AI 會放大既有工作方式</li>
+      <li>五件事還在我們手上：人類仍能控制的關鍵變數</li>
+      <li>七步 SOP：讓 AI 強制慢下來的工程化流程</li>
+      <li>三道閘門：不准直接做、不准只有一個答案、不准沒留下紀錄</li>
+      <li>四個工程體悟</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>七步 SOP（強制思考流程）</h2>
+    <ol>
+      <li>先卡住——不准 AI 立刻動手</li>
+      <li>讀現況——先理解既有程式碼與脈絡</li>
+      <li>一次一題——避免散焦</li>
+      <li>提 2-3 個方案——給選項，不給單一答案</li>
+      <li>段段確認——分段檢查，不是最後一次性 review</li>
+      <li>寫下來——決策、假設、變更全部記錄</li>
+      <li>審核把關——人類仍是最後一道閘門</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>三道閘門（AI 協作硬規則）</h2>
+    <ul>
+      <li><strong>不准直接做：</strong>AI 必須先讀現況、確認問題範圍。</li>
+      <li><strong>不准只有一個答案：</strong>必須提出 2-3 個方案與取捨。</li>
+      <li><strong>不准沒留下紀錄：</strong>所有決策、假設、變更都必須寫下來，可被審核、可被回溯。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>關鍵詞</h2>
+    <p>AI Agent、Claude Code、Anthropic Economic Index、AI SOP、慢即是快、工程領導、軟體開發流程、AI 協作、+50% 生產力、Generative Engine Optimization。</p>
+  </section>
+</header>
 
 <div class="deck">
 

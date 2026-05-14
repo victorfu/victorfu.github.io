@@ -33,7 +33,7 @@
     background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
@@ -1110,12 +1110,12 @@
 
     <div class="section-mark"></div>
     <h1 class="h-bold-sans">Anthropic Economic Index</h1>
-    <p class="lede" style="margin-top: 1rem;">Anthropic 用真實 Claude 對話資料，持續追蹤 AI 在經濟活動中的使用狀況。<br>不是問卷自評，是行為觀測。</p>
+    <p class="lede" style="margin-top: 0.6rem; margin-bottom: 0.6rem;">Anthropic 用真實 Claude 對話資料，持續追蹤 AI 在經濟活動中的使用狀況。<br>不是問卷自評，是行為觀測。</p>
 
-    <div class="two-col" style="margin-top: 2rem;">
+    <div class="two-col" style="margin-top: 0.5rem;">
       <div>
         <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <path d="M16 3.128a4 4 0 0 1 0 7.744" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <circle cx="9" cy="7" r="4" /> </svg> Claude.ai 樣本(消費端)</h3>
-        <ul class="bullet-list">
+        <ul class="bullet-list" style="font-size: 1.15rem; line-height: 1.7;">
           <li>100 萬筆對話，2026/02 採樣</li>
           <li>包含 Free / Pro / Max 各方案</li>
           <li>多輪對話完整保留</li>
@@ -1124,7 +1124,7 @@
       </div>
       <div>
         <h3><svg class="lucide-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 22v-5" /> <path d="M15 8V2" /> <path d="M17 8a1 1 0 0 1 1 1v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1z" /> <path d="M9 8V2" /> </svg> 1P API 樣本(企業端)</h3>
-        <ul class="bullet-list">
+        <ul class="bullet-list" style="font-size: 1.15rem; line-height: 1.7;">
           <li>100 萬筆 prompt-response 對</li>
           <li>來自 api.anthropic.com 直接呼叫</li>
           <li>不含 AWS Bedrock / Google Vertex</li>
@@ -1133,7 +1133,7 @@
       </div>
     </div>
 
-    <h2>分析流程</h2>
+    <h2 style="margin: 1rem 0 0.6rem;">分析流程</h2>
 
     <div class="flow">
       <div class="flow-node">原始對話</div>
@@ -1145,11 +1145,6 @@
       <div class="flow-node">統計聚合 + 公開資料集</div>
     </div>
 
-    <div class="card-tinted">
-      <p style="margin-bottom: 0;">
-        <strong>關鍵差別：</strong>不是「使用者自己說怎麼用」，而是<mark>從真實對話中分析</mark>。資料集公開在 HuggingFace，任何人都可以驗證 — 這是目前最接近真相的 AI 使用實證。
-      </p>
-    </div>
   </section>
 
   <!-- ==================== 3. 七個觀察 — 純文字總結 ==================== -->
@@ -1234,7 +1229,7 @@
         它就怎麼<span class="italic">答</span>
       </h1>
 
-      <hr style="background: white; height: 2px; border: none; width: 200px; margin: 2rem 0;">
+      <hr style="background: white; height: 2px; border: none; width: 200px; margin: 1.2rem 0;">
 
       <p class="lede" style="color: white; opacity: 0.95; white-space: nowrap;">
         人類 prompt 的教育水準 vs AI 回應的教育水準，相關係數：
@@ -1246,7 +1241,7 @@
         Claude 雖然能用非常複雜的方式回應，但<strong style="color: white;">它只在使用者用複雜方式提問時才這樣做</strong>。同一個 AI，簡單 prompt 進，簡單答案出；複雜 prompt 進，複雜答案出。
       </p>
 
-      <div style="background: rgba(0,0,0,0.2); padding: 1.3rem 1.8rem; margin-top: 1.5rem; border-left: 3px solid white;">
+      <div style="background: rgba(0,0,0,0.2); padding: 1.3rem 1.8rem; margin-top: 1rem; margin-right: 14rem; border-left: 3px solid white;">
         <p style="color: white; margin-bottom: 0; font-size: 1rem;">
           <strong style="color: white;">這呼應了 LLM 的本質：</strong>它不是「知道」，是「接下去」 — <mark style="background: rgba(255,255,255,0.3); color: white;">使用 AI 的能力本身，就是一種能力</mark>。會問問題的人，才能拿到 AI 的高品質回答。
         </p>
@@ -1443,7 +1438,7 @@
       <div style="display: grid; grid-template-columns: auto 9rem 1fr; gap: 1.5rem; align-items: baseline; padding-bottom: 0.8rem; border-bottom: 1px solid var(--rule);">
         <div style="font-family: var(--mono); font-size: 1.4rem; color: var(--accent); font-weight: 700; min-width: 2.2rem;">04</div>
         <div style="font-family: var(--sans); font-weight: 800; font-size: 1.7rem; color: var(--ink); line-height: 1;">判斷</div>
-        <div style="font-size: 1.05rem; line-height: 1.5; color: var(--ink-soft);">資訊永遠不完整時，必須有人在<strong style="color: var(--ink);">迷霧中下決定</strong>。資料說 A、直覺說 B、經驗說 C — 該信哪個？必須有人扛。</div>
+        <div style="font-size: 1.05rem; line-height: 1.5; color: var(--ink-soft);">資訊不全時，必須在<strong style="color: var(--ink);">迷霧中下決定</strong>。資料說 A、直覺說 B、經驗說 C — 該信哪個？必須有人扛。</div>
       </div>
 
       <div style="display: grid; grid-template-columns: auto 9rem 1fr; gap: 1.5rem; align-items: baseline;">
@@ -1454,9 +1449,6 @@
 
     </div>
 
-    <div class="bottom-note" style="margin-top: 1.5rem;">
-      共通點：<span class="accent">都不是「做事」</span>，都是<span class="accent">「想清楚」</span>。
-    </div>
   </section>
   <!-- ==================== 19A. Brainstorming SOP(從五件事到操作手冊) ==================== -->
   <section class="slide compact">
@@ -1739,8 +1731,8 @@
 
     <hr style="background: var(--bg); height: 2px; border: none; width: 200px; margin: 1rem 0;">
 
-    <p style="color: rgba(0,0,0,0.7); font-size: 1.05rem; max-width: 720px; line-height: 1.5; margin: 0;">
-      標準、脈絡、取捨、判斷、責任 — 這五件事不會因為工具變強而消失。<br>
+    <p style="color: rgba(0,0,0,0.7); font-size: 1.05rem; line-height: 1.5; margin: 0;">
+      <span style="white-space: nowrap;">標準、脈絡、取捨、判斷、責任 — 這五件事不會因為工具變強而消失。</span><br>
       它們只是<strong style="color: var(--bg);">變得更顯眼、更急迫、更不能逃避</strong>。
     </p>
 
